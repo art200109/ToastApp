@@ -7,7 +7,7 @@ from bson import json_util, ObjectId
 import json
 
 client = MongoClient()
-client = MongoClient('6.tcp.eu.ngrok.io', 10974)
+client = MongoClient('external-mysql-service.myproject.svc', 10974)
 
 app = Flask(__name__)
      
