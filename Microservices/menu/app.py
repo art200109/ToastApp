@@ -13,7 +13,6 @@ app = Flask(__name__)
      
 @app.route("/menu")
 def menu():
-    #return "abcdefg"
     return json.loads(json_util.dumps(client.toast.menu.find()))
 
 if __name__ == "__main__":
