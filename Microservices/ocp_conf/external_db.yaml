@@ -1,0 +1,27 @@
+  kind: "Service"
+  apiVersion: "v1"
+  metadata:
+    name: "external-mysql-service"
+  spec:
+    ports:
+      -
+        name: "mysql"
+        protocol: "TCP"
+        port: 27017
+        targetPort: 27017 
+        nodePort: 0
+  selector: {}
+---
+  kind: "Endpoints"
+  apiVersion: "v1"
+  metadata:
+    name: "external-mysql-service" 
+  subsets: 
+    -
+      addresses:
+        -
+          ip: "192.168.1.141" 
+      ports:
+        -
+          port: 27017 
+          name: "mysql"
