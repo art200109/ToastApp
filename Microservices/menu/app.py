@@ -13,7 +13,8 @@ app = Flask(__name__)
      
 @app.route("/menu")
 def menu():
-    return json.loads(json_util.dumps(client.toast.menu.find()))
+    return son_util.dumps(client.toast.menu.find())
+    #return json.loads(json_util.dumps(client.toast.menu.find()))
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8080)
