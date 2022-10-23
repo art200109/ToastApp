@@ -24,13 +24,12 @@ Set-ItemProperty 'IIS:\Sites\Default Web Site' -name physicalPath -value "C:\ine
 
 New-WebHandler -Name FlaskHandler -Path * -Verb * -Modules FastCgiModule -ScriptProcessor "C:\Python\python.exe|C:\inetpub\wwwroot\ToastApp\AppServer\FlaskApp\wfastcgi.py" -Type $null -Force
 
-$python = "C:\inetpub\wwwroot\FlaskApp\wfastcgi.py"
+$python = "C:\inetpub\wwwroot\ToastApp\AppServer\FlaskApp"
 
-$configPath = "system.webServer/fastCgi/application[@arguments='$python']/environmentVariables/environmentVariable"
+$configPath = "system.webServer/fastCgi/application[@arguments='$($python+"\wfastcgi.py")']/environmentVariables/environmentVariable"
 $config = Get-WebConfiguration $configPath
 if (!$config) {
-    $configPath = "system.webServer/fastCgi/application[@arguments='$python']/environmentVariables"
-    Add-WebConfiguration $configPath -Value @{ 'Name' = 'PYTHONPATH'; Value = "C:\inetpub\wwwroot\ToastApp\AppServer\FlaskApp" }
+    Add-WebConfiguration $configPath -Value @{ 'Name' = 'PYTHONPATH'; Value = "$python" }
     Add-WebConfiguration $configPath -Value @{ 'Name' = 'WSGI_HANDLER'; Value = "app.app" }
 }
 
