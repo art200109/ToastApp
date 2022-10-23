@@ -15,14 +15,14 @@ Enable-WindowsOptionalFeature -FeatureName IIS-CGI -Online
 
 C:\Python\Scripts\wfastcgi-enable.exe
 
-Copy-Item C:\Python\Lib\site-packages\wfastcgi.py C:\inetpub\wwwroot\FlaskApp\
+#Copy-Item C:\Python\Lib\site-packages\wfastcgi.py C:\inetpub\wwwroot\FlaskApp\
 
-icacls C:\inetpub\wwwroot\FlaskApp /grant "NT AUTHORITY\IUSR:(OI)(CI)(RX)"
-icacls C:\inetpub\wwwroot\FlaskApp /grant "Builtin\IIS_IUSRS:(OI)(CI)(RX)"
+icacls C:\inetpub\wwwroot\ToastApp /grant "NT AUTHORITY\IUSR:(OI)(CI)(RX)"
+icacls C:\inetpub\wwwroot\ToastApp /grant "Builtin\IIS_IUSRS:(OI)(CI)(RX)"
 
-Set-ItemProperty 'IIS:\Sites\Default Web Site' -name physicalPath -value "C:\inetpub\wwwroot\FlaskApp"
+Set-ItemProperty 'IIS:\Sites\Default Web Site' -name physicalPath -value "C:\inetpub\wwwroot\ToastApp\AppServer\FlaskApp"
 
-New-WebHandler -Name FlaskHandler -Path * -Verb * -Modules FastCgiModule -ScriptProcessor "C:\Python\python.exe|C:\inetpub\wwwroot\FlaskApp\wfastcgi.py" -Type $null -Force
+New-WebHandler -Name FlaskHandler -Path * -Verb * -Modules FastCgiModule -ScriptProcessor "C:\Python\python.exe|C:\inetpub\wwwroot\ToastApp\AppServer\FlaskApp\wfastcgi.py" -Type $null -Force
 
 $python = "C:\inetpub\wwwroot\FlaskApp\wfastcgi.py"
 
@@ -30,7 +30,7 @@ $configPath = "system.webServer/fastCgi/application[@arguments='$python']/enviro
 $config = Get-WebConfiguration $configPath
 if (!$config) {
     $configPath = "system.webServer/fastCgi/application[@arguments='$python']/environmentVariables"
-    Add-WebConfiguration $configPath -Value @{ 'Name' = 'PYTHONPATH'; Value = "C:\inetpub\wwwroot\FlaskApp" }
+    Add-WebConfiguration $configPath -Value @{ 'Name' = 'PYTHONPATH'; Value = "C:\inetpub\wwwroot\ToastApp\AppServer\FlaskApp" }
     Add-WebConfiguration $configPath -Value @{ 'Name' = 'WSGI_HANDLER'; Value = "app.app" }
 }
 
