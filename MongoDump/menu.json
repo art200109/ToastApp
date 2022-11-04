@@ -1,0 +1,26 @@
+[{
+  "_id": {
+    "$oid": "6353b9c42588dea72806bd72"
+  },
+  "name": "Toast 1",
+  "category": "Toast",
+  "stars": 5,
+  "price": 2,
+  "discount": 5
+},{
+  "_id": {
+    "$oid": "6353bb2a2588dea72806bd73"
+  },
+  "name": "Toast 2",
+  "category": "Toast",
+  "stars": 1,
+  "price": 1
+},{
+  "_id": {
+    "$oid": "6353bb3e2588dea72806bd74"
+  },
+  "name": "Tiras",
+  "category": "Schnitzel",
+  "stars": 5,
+  "price": 10
+}]
