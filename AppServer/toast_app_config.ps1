@@ -1,8 +1,13 @@
 ﻿[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+if (-not (Test-Path C:\temp))
+{
+    New-Item -ItemType Directory C:\temp
+}
+
 
 Invoke-WebRequest -Uri "https://www.python.org/ftp/python/3.7.0/python-3.7.0.exe" -OutFile "c:/temp/python-3.7.0.exe"
 
-c:/temp/python-3.7.0.exe InstallAllUsers=1 PrependPath=1 TargetDir="C:\Python"
+c:/temp/python-3.7.0.exe /q InstallAllUsers=1 PrependPath=1 TargetDir="C:\Python"
 
 C:\Python\python.exe -m pip install --upgrade pip
 
