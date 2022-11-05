@@ -11,7 +11,7 @@ client = MongoClient('external-mysql-service.myproject.svc', 27017)
 
 app = Flask(__name__)
      
-@app.route("/login/<username>")
+@app.route("/<username>")
 def login(username):
     return json_util.dumps(client.toast.users.find_one({"username": username}))
     #return json.loads(json_util.dumps(client.toast.menu.find()))
