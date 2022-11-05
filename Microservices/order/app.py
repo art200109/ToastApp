@@ -12,7 +12,7 @@ client = MongoClient('external-mysql-service.toast.svc', 27017)
 app = Flask(__name__)
      
 @app.route("/", methods=['POST'])
-def order(product_id):
+def order():
     client.toast.orders.insert_one(request.args.to_dict())
     return 'success', 200
 

@@ -112,7 +112,7 @@ for (let i = 0; i < filterbuttons.length; i++) {
   });
 }
 
-function order(product_id)
+async function order(product_id)
 {
 	try {     
     const response = await fetch("/order", {
