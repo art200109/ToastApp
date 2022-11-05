@@ -15,6 +15,13 @@ app = Flask(__name__)
 def all_inventory():
     return json_util.dumps(client.toast.inventory.find())
 
+@app.route("/",methods=['PUT'])
+def update_item():
+    data = request.get_json()
+    client.toast.inventory.update_one({ "name": data["name"] }, data)
+    return 'success', 200
+
+
 @app.route("/<product_name>")
 def item(product_name):
     return json_util.dumps(client.toast.inventory.find_one({ 'name': product_name}))

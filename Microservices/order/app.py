@@ -6,6 +6,7 @@ from pymongo import MongoClient
 from bson import json_util, ObjectId
 import json
 from datetime import datetime
+import requests
 
 client = MongoClient()
 client = MongoClient('external-mysql-service.toast.svc', 27017)
@@ -32,7 +33,7 @@ def order():
         inventory['key'].amount -= meal.recipe['key']
         if(inventory['key'].amount < 0)
             return 'not enough', 422
-    
+        requests.put(inventory_url, json=inventory['key'])
     
     return 'success', 200
 
