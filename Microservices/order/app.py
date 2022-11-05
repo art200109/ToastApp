@@ -11,6 +11,8 @@ client = MongoClient()
 client = MongoClient('external-mysql-service.toast.svc', 27017)
 
 menu_url = "http://menu.toast.svc:8080"
+inventory_url = "http://inventory.toast.svc:8080"
+
 
 app = Flask(__name__)
      
@@ -22,6 +24,16 @@ def order():
     
     with urllib.request.urlopen(menu_url+"/"+data["product_id"]) as url:
             meal = json.load(url)
+            
+    with urllib.request.urlopen(inventory_url) as url:
+        inventory = json.load(url)
+        
+    for key in meal.recipe:
+        inventory['key'].amount -= meal.recipe['key']
+        if(inventory['key'].amount < 0)
+            return 'not enough', 422
+    
+    
     return 'success', 200
 
 if __name__ == "__main__":
