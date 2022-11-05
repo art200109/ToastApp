@@ -117,9 +117,11 @@ async function order(product_id)
 	try {     
     const response = await fetch("/order", {
       method: 'post',
-      body: {
-        "product_id": product_id
-      }
+	  headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+	  },
+	  body: JSON.stringify({"product_id": product_id})
     });
     console.log('Completed!', response);
   } catch(err) {

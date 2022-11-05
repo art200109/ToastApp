@@ -13,7 +13,8 @@ app = Flask(__name__)
      
 @app.route("/", methods=['POST'])
 def order():
-    client.toast.orders.insert_one(request.args.to_dict())
+    print(request.get_json())
+    client.toast.orders.insert_one(request.get_json())
     return 'success', 200
 
 if __name__ == "__main__":

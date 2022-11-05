@@ -1,5 +1,6 @@
 from flask import Flask, render_template, redirect, url_for, request
 import os
+import sys
 import urllib.parse, urllib.request, json 
 
 username = ""
@@ -37,7 +38,7 @@ def login():
     
 @app.route("/order", methods=['POST'])
 def order():
-    data = urllib.parse.urlencode({ "product_id": request.args.get('product_id', None), "username": username }).encode()
+    data = urllib.parse.urlencode({ "product_id": request.get_json()["product_id"], "username": username }).encode()
     req =  urllib.request.Request(order_url, data=data) # this will make the method "POST"
     resp = urllib.request.urlopen(req)
     return resp
