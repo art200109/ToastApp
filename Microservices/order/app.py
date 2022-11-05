@@ -29,9 +29,9 @@ def order():
     with urllib.request.urlopen(inventory_url) as url:
         inventory = json.load(url)
         
-    for key in meal.recipe:
-        inventory['key'].amount -= meal.recipe['key']
-        if(inventory['key'].amount < 0):
+    for key in meal['recipe']:
+        inventory['key']['amount'] -= meal['recipe']['key']
+        if(inventory['key']['amount'] < 0):
             return 'not enough', 422
         requests.put(inventory_url, json=inventory['key'])
     
