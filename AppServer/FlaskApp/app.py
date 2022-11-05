@@ -2,8 +2,8 @@ from flask import Flask, render_template, redirect, url_for, request
 import os
 import urllib.request, json 
 
-menu_url = "http://menu-toast.172.31.123.117.nip.io/menu"
-login_url = "http://login-toast.172.31.123.117.nip.io/login"
+menu_url = "http://menu-toast.172.31.123.117.nip.io"
+login_url = "http://login-toast.172.31.123.117.nip.io"
 
 template_dir = os.path.dirname(__file__)
 app = Flask(__name__, template_folder=template_dir)
