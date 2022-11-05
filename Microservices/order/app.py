@@ -30,7 +30,7 @@ def order():
         inventory = json.load(url)
         
     for key in meal['recipe']:
-        int(inventory[key]['amount']) -= int(meal['recipe'][key])
+        inventory[key]['amount'] = int(inventory[key]['amount']) - int(meal['recipe'][key])
         if(inventory[key]['amount'] < 0):
             return 'not enough', 422
         requests.put(inventory_url, json=inventory['key'])
