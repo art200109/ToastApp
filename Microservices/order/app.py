@@ -14,8 +14,9 @@ app = Flask(__name__)
      
 @app.route("/", methods=['POST'])
 def order():
-    data = request.get_json().append({ "order_time": datetime.today() })
-    client.toast.orders.insert_one(request.get_json())
+    data = request.get_json()
+    data["order_time"] = datetime.today()
+    client.toast.orders.insert_one(data)
     return 'success', 200
 
 if __name__ == "__main__":
