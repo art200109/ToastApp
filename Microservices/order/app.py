@@ -10,6 +10,8 @@ from datetime import datetime
 client = MongoClient()
 client = MongoClient('external-mysql-service.toast.svc', 27017)
 
+menu_url = "http://menu.toast.svc:8080"
+
 app = Flask(__name__)
      
 @app.route("/", methods=['POST'])
@@ -17,6 +19,9 @@ def order():
     data = request.get_json()
     data["order_time"] = datetime.today()
     client.toast.orders.insert_one(data)
+    
+    with urllib.request.urlopen(menu_url+"/"+data["product_id"]) as url:
+            meal = json.load(url)
     return 'success', 200
 
 if __name__ == "__main__":

@@ -123,8 +123,8 @@ async function order(product_id)
 	  },
 	  body: JSON.stringify({"product_id": product_id})
     });
-    console.log('Completed!', response);
+	alert("Order placed succefully")
   } catch(err) {
-    console.error(`Error: ${err}`);
+	alert("Somthing went wrong :(")
   }
 }

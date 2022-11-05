@@ -5,6 +5,7 @@ import urllib.request, json
 from pymongo import MongoClient
 from bson import json_util, ObjectId
 import json
+from bson.objectid import ObjectId
 
 client = MongoClient()
 client = MongoClient('external-mysql-service.toast.svc', 27017)
@@ -12,9 +13,12 @@ client = MongoClient('external-mysql-service.toast.svc', 27017)
 app = Flask(__name__)
      
 @app.route("/")
-def menu():
+def all_menu():
     return json_util.dumps(client.toast.menu.find())
-    #return json.loads(json_util.dumps(client.toast.menu.find()))
+
+@app.route("/<product_id>")
+def meal(product_id):
+    return json_util.dumps(client.toast.menu.find_one(ObjectId(product_id)))
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8080)

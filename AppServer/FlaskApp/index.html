@@ -412,7 +412,7 @@
                   <div class="badge">-{{ food.discount }}%</div>
 				{% endif %}
 
-                  <button onclick="order('{{ food.name }}')" class="btn food-menu-btn">Order Now</button>
+                  <button onclick="order('{{ food._id['$oid'] }}')" class="btn food-menu-btn">Order Now</button>
                 </div>
 
                 <div class="wrapper">
