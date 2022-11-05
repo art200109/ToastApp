@@ -5,6 +5,7 @@ import urllib.request, json
 from pymongo import MongoClient
 from bson import json_util, ObjectId
 import json
+from datetime import datetime
 
 client = MongoClient()
 client = MongoClient('external-mysql-service.toast.svc', 27017)
@@ -13,7 +14,7 @@ app = Flask(__name__)
      
 @app.route("/", methods=['POST'])
 def order():
-    print(request.get_json())
+    data = request.get_json.append({ "order_time": datetime.today() })
     client.toast.orders.insert_one(request.get_json())
     return 'success', 200
 
