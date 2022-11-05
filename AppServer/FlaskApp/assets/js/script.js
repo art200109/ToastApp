@@ -111,3 +111,18 @@ for (let i = 0; i < filterbuttons.length; i++) {
 
   });
 }
+
+function order(product_id)
+{
+	try {     
+    const response = await fetch("/order", {
+      method: 'post',
+      body: {
+        "product_id": product_id
+      }
+    });
+    console.log('Completed!', response);
+  } catch(err) {
+    console.error(`Error: ${err}`);
+  }
+}

@@ -11,10 +11,9 @@ client = MongoClient('external-mysql-service.toast.svc', 27017)
 
 app = Flask(__name__)
      
-@app.route("/<product_id>", methods=['POST'])
+@app.route("/", methods=['POST'])
 def order(product_id):
-    username  = request.args.get('username', None)
-    client.toast.orders.insert_one({ "product_id":product_id, "username": username })
+    client.toast.orders.insert_one(request.args.to_dict())
     return 'success', 200
 
 if __name__ == "__main__":
