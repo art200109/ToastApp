@@ -16,7 +16,8 @@ inventory_url = "http://inventory.toast.svc:8080"
 
 
 app = Flask(__name__)
-     
+app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True 
+ 
 @app.route("/", methods=['POST'])
 def order():
     data = request.get_json()
@@ -39,6 +40,9 @@ def order():
         requests.put(inventory_url, json=inventory_item)
     
     return 'success', 200
+
+def parse_mongo(data):
+    return json.loads(json_util.dumps(data))
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8080)
