@@ -15,7 +15,7 @@ app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
      
 @app.route("/")
 def all_menu():
-    return jsonify(client.toast.menu.find())
+    return jsonify(json_util.dumps(client.toast.menu.find()))
 
 @app.route("/<product_id>")
 def meal(product_id):
