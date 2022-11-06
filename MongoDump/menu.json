@@ -6,7 +6,11 @@
   "category": "Toast",
   "stars": 5,
   "price": 2,
-  "discount": 5
+  "discount": 5,
+  "recipe": {
+    "cheese": 1,
+    "bread": 2
+  }
 },{
   "_id": {
     "$oid": "6353bb2a2588dea72806bd73"
@@ -14,7 +18,11 @@
   "name": "Toast 2",
   "category": "Toast",
   "stars": 1,
-  "price": 1
+  "price": 1,
+  "recipe": {
+    "cheese": 4,
+    "bread": 2
+  }
 },{
   "_id": {
     "$oid": "6353bb3e2588dea72806bd74"
@@ -22,5 +30,8 @@
   "name": "Tiras",
   "category": "Schnitzel",
   "stars": 5,
-  "price": 10
+  "price": 10,
+  "recipe": {
+    "schnitzel": 1
+  }
 }]
