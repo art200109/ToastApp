@@ -37,7 +37,8 @@ def order():
         inventory_item['amount'] = int(inventory_item['amount']) - int(meal['recipe'][key])
         if(inventory_item['amount'] < 0):
             return 'not enough', 422
-        requests.put(inventory_url, json=inventory_item)
+        response = requests.put(inventory_url, json=inventory_item)
+        response.raise_for_status()
     
     return 'success', 200
 
