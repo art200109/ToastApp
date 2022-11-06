@@ -1,5 +1,5 @@
 #sall
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request,jsonify
 import os
 import urllib.request, json 
 from pymongo import MongoClient
@@ -15,7 +15,7 @@ app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
      
 @app.route("/")
 def all_menu():
-    return json_util.dumps(client.toast.menu.find())
+    return jsonify(client.toast.menu.find())
 
 @app.route("/<product_id>")
 def meal(product_id):
