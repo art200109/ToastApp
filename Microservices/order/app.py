@@ -17,7 +17,11 @@ inventory_url = "http://inventory.toast.svc:8080"
 
 app = Flask(__name__)
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True 
- 
+
+@app.route("/", methods=['GET'])
+def all_orders():
+    return parse_mongo(client.toast.orders.find())
+
 @app.route("/", methods=['POST'])
 def order():
     data = request.get_json()

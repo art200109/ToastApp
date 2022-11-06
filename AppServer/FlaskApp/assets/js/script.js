@@ -124,11 +124,11 @@ async function order(product_id, confirmed)
 			  body: JSON.stringify({"product_id": product_id,"confirmed": confirmed})
 		});
 		if (!response.ok) {
-            throw Error(response.statusText);
+            throw Error(response.status);
         } 
 		alert("Order placed succefully")
   } catch(err) {
-	  if(response.status == "422")
+	  if(err.message == "422")
 		  alert("Not Enough Ingridients :(")
 	  else
 		  alert("Somthing went wrong :(")
