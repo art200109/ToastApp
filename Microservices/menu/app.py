@@ -24,7 +24,7 @@ def meal(product_id):
     return parse_mongo(client.toast.menu.find_one(ObjectId(product_id)))
 
 def parse_mongo(data):
-    return json.loads(json_util.dumps(data))
+    return jsonify(json.loads(json_util.dumps(data)))
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8080)

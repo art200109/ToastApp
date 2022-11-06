@@ -17,7 +17,7 @@ def login(username):
     return parse_mongo(client.toast.users.find_one({"username": username}))
 
 def parse_mongo(data):
-    return json.loads(json_util.dumps(data))
+    return jsonify(json.loads(json_util.dumps(data)))
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8080)
