@@ -20,7 +20,7 @@ def all_inventory():
 def update_item():
     data = request.get_json()
     client.toast.inventory.update_one({ "name": data["name"] }, {
-        "$set": {"amount":data["amount"], "confirmed":data["confirmed"]}
+        "$set": {"amount":data["amount"]}
     })
     return 'success', 200
 

@@ -11,7 +11,11 @@ def create_minishift_url(service):
 
 
 username = ""
-minishift_ip = subprocess.check_output("minishift ip", shell=True).decode(sys.stdout.encoding).strip()
+#p = subprocess.Popen("minishift ip", stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.DEVNULL)
+#out, err = p.communicate()
+#minishift_ip = out.decode(sys.stdout.encoding).strip()
+minishift_ip = "192.168.99.101"
+
 
 menu_url = create_minishift_url("menu")
 login_url = create_minishift_url("login")
