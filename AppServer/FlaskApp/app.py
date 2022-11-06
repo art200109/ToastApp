@@ -4,6 +4,7 @@ import sys
 import urllib.request, json
 import requests
 from datetime import datetime
+import subprocess
 
 def create_minishift_url(service):
     return "http://"+service+"-toast."+minishift_ip+".nip.io"
