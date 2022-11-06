@@ -128,6 +128,9 @@ async function order(product_id, confirmed)
         } 
 		alert("Order placed succefully")
   } catch(err) {
-	alert("Somthing went wrong :(")
+	  if(response.status == "422")
+		  alert("Not Enough Ingridients :(")
+	  else
+		  alert("Somthing went wrong :(")
   }
 }

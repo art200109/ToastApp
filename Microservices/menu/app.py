@@ -11,6 +11,7 @@ client = MongoClient()
 client = MongoClient('external-mysql-service.toast.svc', 27017)
 
 app = Flask(__name__)
+app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
      
 @app.route("/")
 def all_menu():
