@@ -7,9 +7,9 @@ from datetime import datetime
 
 username = ""
 
-menu_url = "http://menu-toast.172.31.123.117.nip.io"
-login_url = "http://login-toast.172.31.123.117.nip.io"
-order_url = "http://order-toast.172.31.123.117.nip.io"
+menu_url = "http://menu-toast.192.168.99.101.nip.io"
+login_url = "http://login-toast.192.168.99.101.nip.io"
+order_url = "http://order-toast.192.168.99.101.nip.io"
 
 template_dir = os.path.dirname(__file__)
 app = Flask(__name__, template_folder=template_dir)
