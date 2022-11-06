@@ -5,11 +5,16 @@ import urllib.request, json
 import requests
 from datetime import datetime
 
-username = ""
+def create_minishift_url(service):
+    return "http://"+service+"-toast."+minishift_ip+".nip.io"
 
-menu_url = "http://menu-toast.192.168.99.101.nip.io"
-login_url = "http://login-toast.192.168.99.101.nip.io"
-order_url = "http://order-toast.192.168.99.101.nip.io"
+
+username = ""
+minishift_ip = subprocess.check_output("minishift ip", shell=True).decode(sys.stdout.encoding).strip()
+
+menu_url = create_minishift_url("menu")
+login_url = create_minishift_url("login")
+order_url = create_minishift_url("order")
 
 template_dir = os.path.dirname(__file__)
 app = Flask(__name__, template_folder=template_dir)
