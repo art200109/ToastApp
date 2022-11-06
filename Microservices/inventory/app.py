@@ -18,7 +18,9 @@ def all_inventory():
 @app.route("/",methods=['PUT'])
 def update_item():
     data = request.get_json()
-    client.toast.inventory.update_one({ "name": data["name"] }, {"$set": {"amount":data["amount"]}}, upsert=True)
+    client.toast.inventory.update_one({ "name": data["name"] }, {
+        "$set": {"amount":data["amount"], "confirmed":data["confirmed"]}
+    })
     return 'success', 200
 
 

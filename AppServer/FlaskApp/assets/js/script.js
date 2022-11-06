@@ -112,18 +112,21 @@ for (let i = 0; i < filterbuttons.length; i++) {
   });
 }
 
-async function order(product_id)
+async function order(product_id, confirmed)
 {
 	try {     
-    const response = await fetch("/order", {
-      method: 'post',
-	  headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-	  },
-	  body: JSON.stringify({"product_id": product_id})
-    });
-	alert("Order placed succefully")
+		const response = await fetch("/order", {
+			  method: 'post',
+			  headers: {
+			  'Accept': 'application/json',
+			  'Content-Type': 'application/json'
+			  },
+			  body: JSON.stringify({"product_id": product_id,"confirmed": confirmed})
+		});
+		if (!response.ok) {
+            throw Error(response.statusText);
+        } 
+		alert("Order placed succefully")
   } catch(err) {
 	alert("Somthing went wrong :(")
   }

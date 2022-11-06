@@ -40,7 +40,8 @@ def login():
     
 @app.route("/order", methods=['POST'])
 def order():
-    data = { "product_id": request.get_json()["product_id"], "username": username }
+    data = request.get_json()
+    data["username"] = username
     resp = requests.post(order_url, json=data)
     return (resp.content, resp.status_code, resp.headers.items())
     
