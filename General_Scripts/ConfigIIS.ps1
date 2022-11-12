@@ -31,11 +31,19 @@ $features = @(
     "IIS-CGI"
 )
 
-foreach($feature in $features) { Enable-WindowsOptionalFeature -Online -FeatureName $feature }
+foreach($feature in $features) 
+{ 
+    if(-not $(get-WindowsOptionalFeature $feature))
+    {
+        Enable-WindowsOptionalFeature -Online -FeatureName $feature 
+    }
+}
 
-cd C:\inetpub\wwwroot
-git clone https://github.com/art200109/ToastApp.git
-
+if(-not $(Test-Path C:\inetpub\wwwroot\ToastApp))
+{
+    cd C:\inetpub\wwwroot
+    git clone https://github.com/art200109/ToastApp.git
+}
 icacls C:\inetpub\wwwroot\ToastApp /grant "NT AUTHORITY\IUSR:(OI)(CI)(RX)"
 icacls C:\inetpub\wwwroot\ToastApp /grant "Builtin\IIS_IUSRS:(OI)(CI)(RX)"
 
