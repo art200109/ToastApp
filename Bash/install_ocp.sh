@@ -1,4 +1,6 @@
 sudo su
+sed 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config > /etc/selinux/config_new
+mv -f /etc/selinux/config_new /etc/selinux/config
 setenforce 0
 
 yum install -y docker net-tools git
