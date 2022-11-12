@@ -41,8 +41,6 @@ TimeoutSec=300
 WantedBy=multi-user.target
 EOF
 
-PATH=$PATH:/opt/ocp/
-
 systemctl enable openshift
 systemctl start openshift
 
