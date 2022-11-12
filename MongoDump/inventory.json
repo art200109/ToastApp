@@ -1,0 +1,19 @@
+[{
+  "_id": {
+    "$oid": "636694fe910f782b9cdf9a09"
+  },
+  "name": "cheese",
+  "amount": 39
+},{
+  "_id": {
+    "$oid": "63669555910f782b9cdf9a0a"
+  },
+  "name": "bread",
+  "amount": 29
+},{
+  "_id": {
+    "$oid": "63676c09ddba52789d6a55a0"
+  },
+  "name": "schnitzel",
+  "amount": 0
+}]
