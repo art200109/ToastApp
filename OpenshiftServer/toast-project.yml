@@ -139,17 +139,33 @@ items:
       type: GitHub
     - generic:
         secret: LbC0nZ7Fjn1bbSBCeEPt
-      type: Generic
-- apiVersion: v1
-  kind: Service
+      type: Generic    
+- kind: "Service"
+  apiVersion: "build.openshift.io/v1"
   metadata:
-    name: external-mysql-service
-    namespace: toast
+    name: "external-mysql-service"
   spec:
-    clusterIP: 172.30.165.155
     ports:
-    - name: mysql
-      port: 27017
+      -
+        name: "mysql"
+        protocol: "TCP"
+        port: 27017
+        targetPort: 27017 
+        nodePort: 0
+  selector: {}
+- kind: "Endpoints"
+  apiVersion: "build.openshift.io/v1"
+  metadata:
+    name: "external-mysql-service" 
+  subsets: 
+    -
+      addresses:
+        -
+          ip: "<<mongo_ip>>" 
+      ports:
+        -
+          port: 27017 
+          name: "mysql"
 kind: List
 metadata:
   resourceVersion: ""
