@@ -37,6 +37,7 @@ foreach($feature in $features)
     {
         Enable-WindowsOptionalFeature -Online -FeatureName $feature 
     }
+    Write-host "$feature - Installed" -foreground Green
 }
 
 if(-not $(Test-Path C:\inetpub\wwwroot\ToastApp))
