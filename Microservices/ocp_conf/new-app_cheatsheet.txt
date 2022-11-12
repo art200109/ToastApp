@@ -1,4 +1,0 @@
-oc new-app https://github.com/art200109/ToastApp.git --context-dir=Microservices/menu --name menu
-oc new-app https://github.com/art200109/ToastApp.git --context-dir=Microservices/login --name login
-oc new-app https://github.com/art200109/ToastApp.git --context-dir=Microservices/inventory --name inventory
-oc new-app https://github.com/art200109/ToastApp.git --context-dir=Microservices/order --name order
