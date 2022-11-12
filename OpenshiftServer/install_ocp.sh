@@ -27,7 +27,7 @@ Requires=docker.service
 [Service]
 ExecStart=/opt/ocp/oc cluster up --public-hostname=toast-ocp.westeurope.cloudapp.azure.com --routing-suffix=20.13.17.93.nip.io --loglevel=1
 ExecStop=/opt/ocp/oc cluster down
-WorkingDirectory=/var/lib/openshift
+WorkingDirectory=/opt/ocp
 Restart=no
 StandardOutput=syslog
 StandardError=syslog
