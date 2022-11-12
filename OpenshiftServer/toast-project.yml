@@ -141,7 +141,7 @@ items:
         secret: LbC0nZ7Fjn1bbSBCeEPt
       type: Generic    
 - kind: "Service"
-  apiVersion: "build.openshift.io/v1"
+  apiVersion: "v1"
   metadata:
     name: "external-mysql-service"
   spec:
@@ -154,7 +154,7 @@ items:
         nodePort: 0
   selector: {}
 - kind: "Endpoints"
-  apiVersion: "build.openshift.io/v1"
+  apiVersion: "v1"
   metadata:
     name: "external-mysql-service" 
   subsets: 
