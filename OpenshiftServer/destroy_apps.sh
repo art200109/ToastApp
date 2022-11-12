@@ -1,3 +1,5 @@
+PATH=$PATH:/opt/ocp/
+
 apps=( menu login inventory order )
 for app in "${apps[@]}"
 do
