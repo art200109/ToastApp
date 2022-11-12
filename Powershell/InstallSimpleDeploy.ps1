@@ -2,3 +2,5 @@
 Expand-Archive C:\temp\deploy.zip -DestinationPath C:\inetpub\wwwroot\SimpleDeploy
 New-WebSite -Name "SimpleDeploy" -Port 1234 -PhysicalPath "C:\inetpub\wwwroot\SimpleDeploy"
 Remove-WebHandler FlaskHandler -PSPath 'IIS:\Sites\SimpleDeploy'
+icacls C:\inetpub\wwwroot\SimpleDeploy /grant "NT AUTHORITY\IUSR:(OI)(CI)F" /T
+icacls C:\inetpub\wwwroot\SimpleDeploy /grant "Builtin\IIS_IUSRS:(OI)(CI)F" /T
