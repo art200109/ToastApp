@@ -5,6 +5,7 @@ import urllib.request, json
 import requests
 from datetime import datetime
 import subprocess
+import socket
 
 def create_minishift_url(service):
     return "http://"+service+"-toast."+minishift_ip+".nip.io"
@@ -14,7 +15,8 @@ username = ""
 #p = subprocess.Popen("minishift ip", stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.DEVNULL)
 #out, err = p.communicate()
 ##minishift_ip = out.decode(sys.stdout.encoding).strip()
-minishift_ip = "20.13.17.93"
+
+minishift_ip = socket.gethostbyname("toast-ocp.westeurope.cloudapp.azure.com")
 
 
 menu_url = create_minishift_url("menu")
