@@ -1,7 +1,3 @@
-sudo su
-sed 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config > /etc/selinux/config_new
-mv -f /etc/selinux/config_new /etc/selinux/config
-setenforce 0
 cat << EOF >/etc/yum.repos.d/mongodb-org-6.0.repo
 [mongodb-org-6.0]
 name=MongoDB Repository
@@ -16,17 +12,7 @@ mv -f /etc/mongod_new.conf /etc/mongod.conf
 systemctl restart mongod
 systemctl enable mongod
 
-cat << EOF >>/etc/ssh/sshd_config
-Port 22
-Port 222
-EOF
-systemctl restart sshd
-
-systemctl disable firewalld
-systemctl stop firewalld
-#firewall-cmd --permanent --add-port 222/tcp
 #firewall-cmd --permanent --add-port 27017/tcp
 #firewall-cmd --reload
 
-git clone https://github.com/art200109/ToastApp.git
-mongorestore --drop ToastApp/MongoDump/dump
+mongorestore --drop ./dump
