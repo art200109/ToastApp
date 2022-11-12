@@ -63,6 +63,5 @@ PATH=$PATH:/opt/ocp/
 systemctl enable openshift
 systemctl start openshift
 
-#testsss
 #Edit the file: openshift.local.clusterup/node/node-config.yml and set dnsIP: "" to 8.8.8.8
 #Edit the file openshift.local.clusterup/kubedns/resolv.conf and add
