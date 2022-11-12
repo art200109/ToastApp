@@ -11,6 +11,6 @@ done
 
 mongo_ip=$(dig +short toast-mongo.westeurope.cloudapp.azure.com)
 
-sed 's/<<mongo_ip>>/$mongo_ip/g' ./toast-project.yml > ./toast-project_new.yml
+sed "s/<<mongo_ip>>/$mongo_ip/g" ./toast-project.yml > ./toast-project_new.yml
 
 oc apply -f ./toast-project_new.yml
