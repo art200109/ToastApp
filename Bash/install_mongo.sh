@@ -28,5 +28,7 @@ systemctl stop firewalld
 #firewall-cmd --permanent --add-port 27017/tcp
 #firewall-cmd --reload
 
+
+#test
 git clone https://github.com/art200109/ToastApp.git
 mongorestore --drop ToastApp/MongoDump/dump
