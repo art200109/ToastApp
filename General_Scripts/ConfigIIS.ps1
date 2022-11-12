@@ -33,7 +33,7 @@ $features = @(
 
 foreach($feature in $features) 
 { 
-    if(-not $(get-WindowsOptionalFeature -FeatureName $feature))
+    if($(get-WindowsOptionalFeature -Online -FeatureName $feature).State -ne "Enabled")
     {
         Enable-WindowsOptionalFeature -Online -FeatureName $feature 
     }
