@@ -13,7 +13,7 @@ def create_minishift_url(service):
 username = ""
 #p = subprocess.Popen("minishift ip", stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.DEVNULL)
 #out, err = p.communicate()
-#minishift_ip = out.decode(sys.stdout.encoding).strip()
+##minishift_ip = out.decode(sys.stdout.encoding).strip()
 minishift_ip = "20.13.17.93"
 
 
