@@ -1,5 +1,7 @@
 PATH=$PATH:/opt/ocp/
 
+oc new-project toast
+
 apps=( menu login inventory order )
 for app in "${apps[@]}"
 do
