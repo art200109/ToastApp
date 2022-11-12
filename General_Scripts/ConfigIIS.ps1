@@ -45,8 +45,8 @@ if(-not $(Test-Path C:\inetpub\wwwroot\ToastApp))
     cd C:\inetpub\wwwroot
     git clone https://github.com/art200109/ToastApp.git
 }
-icacls C:\inetpub\wwwroot\ToastApp /grant "NT AUTHORITY\IUSR:(OI)(CI)(RX)"
-icacls C:\inetpub\wwwroot\ToastApp /grant "Builtin\IIS_IUSRS:(OI)(CI)(RX)"
+icacls C:\inetpub\wwwroot\ToastApp /grant "NT AUTHORITY\IUSR:(OI)(CI)F" /T
+icacls C:\inetpub\wwwroot\ToastApp /grant "Builtin\IIS_IUSRS:(OI)(CI)F" /T
 
 C:\Python\Scripts\wfastcgi-enable.exe
 ###Copy-Item C:\Python\Lib\site-packages\wfastcgi.py C:\inetpub\wwwroot\FlaskApp\
