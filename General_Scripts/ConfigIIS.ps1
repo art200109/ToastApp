@@ -42,7 +42,7 @@ foreach($feature in $features)
     }
     catch
     {
-         DISM /Online /Enable-Feature /All /FeatureName:$feature
+         DISM /Online /Enable-Feature /FeatureName:$feature
     }
     Write-host "$feature - Installed" -foreground Green
 }
