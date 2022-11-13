@@ -1,4 +1,6 @@
-﻿if (-not (Test-Path C:\temp))
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+
+if (-not (Test-Path C:\temp))
 {
     New-Item -ItemType Directory C:\temp
 }
