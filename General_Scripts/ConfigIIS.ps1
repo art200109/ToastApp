@@ -33,9 +33,16 @@ $features = @(
 
 foreach($feature in $features) 
 { 
-    if($(get-WindowsOptionalFeature -Online -FeatureName $feature).State -ne "Enabled")
+    try
     {
-        Enable-WindowsOptionalFeature -Online -FeatureName $feature 
+        if($(get-WindowsOptionalFeature -Online -FeatureName $feature).State -ne "Enabled")
+        {
+            Enable-WindowsOptionalFeature -Online -FeatureName $feature 
+        }
+    }
+    catch
+    {
+         DISM /Online /Enable-Feature /All /FeatureName:$feature
     }
     Write-host "$feature - Installed" -foreground Green
 }
