@@ -1,4 +1,5 @@
 from flask import Flask, render_template, redirect, url_for, request
+import os
 
 template_dir = os.path.dirname(__file__)
 app = Flask(__name__, template_folder=template_dir)
