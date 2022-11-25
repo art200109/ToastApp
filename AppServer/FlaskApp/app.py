@@ -64,6 +64,7 @@ def login():
         if user == "null" or user["password"] != password:
             error = 'Invalid Credentials. Please try again.'
         else:
+            log()
             return redirect(url_for('home'))
     return render_template('login.html', error=error)
 
