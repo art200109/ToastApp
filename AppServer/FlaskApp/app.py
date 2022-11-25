@@ -7,6 +7,8 @@ import urllib.request
 from datetime import datetime
 import win32evtlogutil
 import win32evtlog
+import logging
+from logging.handlers import NTEventLogHandler
 
 
 import requests
@@ -40,6 +42,13 @@ order_url = create_minishift_url("order")
 
 template_dir = os.path.dirname(__file__)
 app = Flask(__name__, template_folder=template_dir)
+
+
+windows_handler = NTEventLogHandler(
+    appname="Toast App"
+)
+if not app.debug:
+    app.logger.addHandler(windows_handler)
 
 
 @app.route("/home")
