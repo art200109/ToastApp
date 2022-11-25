@@ -50,7 +50,7 @@ windows_handler = NTEventLogHandler(
 windows_handler.setLevel(logging.DEBUG)
 
 app.logger.addHandler(windows_handler)
-
+logging.debug("debug log")
 
 @app.route("/home")
 def home():
