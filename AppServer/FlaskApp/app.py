@@ -47,8 +47,8 @@ app = Flask(__name__, template_folder=template_dir)
 windows_handler = NTEventLogHandler(
     appname="Toast App"
 )
-if not app.debug:
-    app.logger.addHandler(windows_handler)
+
+app.logger.addHandler(windows_handler)
 
 
 @app.route("/home")
