@@ -8,5 +8,5 @@ C:\Python\python.exe -m pip install --upgrade pip
 C:\Python\python.exe -m pip install wfastcgi --use-pep517
 
 C:\Python\python.exe -m pip install flask
-C:\Python\python.exe -m pip install pymongo
 C:\Python\python.exe -m pip install requests
+C:\Python\python.exe -m pip install pywin32
