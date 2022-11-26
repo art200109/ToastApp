@@ -20,6 +20,7 @@ def create_minishift_url(service):
 
 
 def log():
+    logging.debug("debug log")
     DUMMY_EVT_APP_NAME = "Toast App"
     DUMMY_EVT_ID = 1234
 
@@ -50,7 +51,6 @@ windows_handler = NTEventLogHandler(
 windows_handler.setLevel(logging.DEBUG)
 
 app.logger.addHandler(windows_handler)
-logging.debug("debug log")
 
 @app.route("/home")
 def home():
