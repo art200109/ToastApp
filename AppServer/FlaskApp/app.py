@@ -9,6 +9,10 @@ import win32evtlogutil
 import win32evtlog
 import logging
 from logging.handlers import NTEventLogHandler
+from flask.logging import default_handler
+
+root = logging.getLogger()
+
 
 
 import requests
@@ -51,6 +55,8 @@ windows_handler = NTEventLogHandler(
 windows_handler.setLevel(logging.DEBUG)
 
 app.logger.addHandler(windows_handler)
+root.addHandler(default_handler)
+root.addHandler(windows_handler)
 
 @app.route("/home")
 def home():
