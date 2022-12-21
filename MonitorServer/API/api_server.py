@@ -104,7 +104,7 @@ class DataBase():
                                             'server_name': payload.get('server_name'),
                                             'value': payload.get('value')
                                             })
-            elif payload['table'] == 'disk_space':
+            elif payload['table'] == 'disk':
                 cursor.execute(f"INSERT INTO {payload['table']} VALUES (:time_stamp ,:server_name, :disk_name, :value)",
                                             {
                                             'time_stamp': datetime.now().strftime("%d/%m/%y %H:%M:%S.%f"),
