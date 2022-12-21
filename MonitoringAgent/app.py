@@ -17,24 +17,27 @@ def time_loop(function,template,interval):
 def cpu(template):
     formated_template = format_template(template,psutil.cpu_percent(4))
     print(formated_template)
-    with open("C:\\temp\\ToastApp\\test","a+") as file:
-        file.write(formated_template+"\n")
+    requests.post(DESTINATION,data=formated_template)
 
 def memory(template):
     formated_template = format_template(template,psutil.virtual_memory()[2])
     print(formated_template)
+    requests.post(DESTINATION,data=formated_template)
 
 def disk(template):
     disks = psutil.disk_partitions()
     for disk in disks:
         formated_template = format_template(template,psutil.disk_usage(disk.device).percent).replace("<DISK>",disk.device)
         print(formated_template)
+        requests.post(DESTINATION,data=formated_template)
 
 path_current_directory = os.path.dirname(__file__)
 path_config_file = os.path.join(path_current_directory, "agent.conf")
 
 config = configparser.ConfigParser()
 config.read(path_config_file)
+
+DESTINATION = config["default"]["destination"]
 
 threading.Thread(target=time_loop(cpu,config["cpu"]["format"],int(config["cpu"]["interval"]))).start()
 threading.Thread(target=time_loop(memory,config["memory"]["format"],int(config["memory"]["interval"]))).start()
