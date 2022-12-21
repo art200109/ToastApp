@@ -109,8 +109,8 @@ class DataBase():
                                             {
                                             'time_stamp': datetime.now().strftime("%d/%m/%y %H:%M:%S.%f"),
                                             'server_name': payload.get('server_name'),
-                                            'value': payload.get('value'),
-                                            'disk_name': payload.get('disk_name')
+                                            'disk_name': payload.get('disk_name'),
+                                            'value': payload.get('value')
                                             })
             else: 
                 cursor.execute(f"INSERT INTO {payload['table']} VALUES (:time_stamp, :value)",
