@@ -4,6 +4,7 @@ import configparser
 import threading
 import os
 import socket
+import json
 
 def format_template(template_str, value):
     template_str = template_str.replace("<HOST>",socket.gethostname())
@@ -15,21 +16,23 @@ def time_loop(function,template,interval):
     function(template)
     
 def cpu(template):
-    formated_template = format_template(template,psutil.cpu_percent(4))
+    formated_template = json.loads(format_template(template,psutil.cpu_percent(4)))
     print(formated_template)
-    requests.post(DESTINATION,data=formated_template)
+    requests.post(DESTINATION,json=formated_template)
 
 def memory(template):
-    formated_template = format_template(template,psutil.virtual_memory()[2])
+    formated_template = json.loads(format_template(template,psutil.virtual_memory()[2]))
     print(formated_template)
-    requests.post(DESTINATION,data=formated_template)
+    requests.post(DESTINATION,json=formated_template)
 
 def disk(template):
     disks = psutil.disk_partitions()
     for disk in disks:
-        formated_template = format_template(template,psutil.disk_usage(disk.device).percent).replace("<DISK>",disk.device)
+        f = format_template(template,psutil.disk_usage(disk.device).percent).replace("<DISK>",disk.device).replace('\\','\\\\')
+        print(f)
+        formated_template = json.loads(f)
         print(formated_template)
-        requests.post(DESTINATION,data=formated_template)
+        requests.post(DESTINATION,json=formated_template)
 
 path_current_directory = os.path.dirname(__file__)
 path_config_file = os.path.join(path_current_directory, "agent.conf")
