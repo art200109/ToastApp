@@ -1,15 +1,13 @@
 import sys, os
-from datetime import datetime
 import sqlite3, json
 import uvicorn
+import threading
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware 
-
+from datetime import datetime
 
 folder_path = os.path.dirname(__file__)
 sys.path.insert(1, folder_path)
-
-DB = 'databast.db'
 
 # DATA BASE
 class DataBase():
@@ -18,6 +16,7 @@ class DataBase():
         """
             This database works with JSON format
         """
+        self.db_name = 'databast.db'
         self.tables = ['cpu','memory','disk_space','events']
         self.create_tables()
 
@@ -25,7 +24,7 @@ class DataBase():
             """
                 Create the tables inside the database
             """
-            db_connect = sqlite3.connect(DB)
+            db_connect = sqlite3.connect(self.db_name)
             cursor = db_connect.cursor()
             cursor.execute("""CREATE TABLE IF NOT EXISTS cpu (
                                 server_name TEXT PRIMARY KEY NOT NULL,
@@ -61,7 +60,7 @@ class DataBase():
 
         """
         if table in self.tables:
-            db_connect = sqlite3.connect(DB)
+            db_connect = sqlite3.connect(self.db_name)
             cursor = db_connect.cursor()
             
             cursor.execute(f"SELECT *, oid  FROM {table}")
@@ -84,7 +83,7 @@ class DataBase():
             the data inside JSON request {table={'cpu', 'memory', 'disk_space', 'events'} , server_name, value}
 
         """
-        db_connect = sqlite3.connect(DB)
+        db_connect = sqlite3.connect(self.db_name)
         cursor = db_connect.cursor()
 
         payload['value'] = (f'time_stamp: {datetime.now().strftime("%d/%m/%y %H:%M:%S.%f")} | value: {payload.get("value")}')
@@ -123,10 +122,9 @@ class DataBase():
         cursor.close()
         db_connect.close()
 
-        
-class APIService:
-    def run(self):
-        uvicorn.run('API_Server:app', host='0.0.0.0', port=8000, log_level='info')
+class API_Server():
+    def run_uvicorn(self):
+        uvicorn.run(app='api_server:app', host='0.0.0.0', log_level='info')
 
 app = FastAPI()
 origins = ["*"]
@@ -134,17 +132,13 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
     allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-db = DataBase()
-service = APIService()
-service.run()
+    allow_headers=["*"]
+                )
 
 @app.get("/")
 async def root():
-    return print(f'Just a page')
-
+    return 'Just a page'
+  
 @app.get("/fetch/table={table}")
 async def fetch(table: str):
     return db.fetch(table)
@@ -154,4 +148,9 @@ async def post_request(request: Request):
     # db.POST_reminders(payload=payload)
     payload = await request.json()
     return db.insert(payload)
-    # raise HTTPException(status_code=404, detail="URL path not found")
+
+db = DataBase()
+api = API_Server()
+
+start_api_thread = threading.Thread(target=api.run_uvicorn)
+start_api_thread.start()
