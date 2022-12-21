@@ -9,15 +9,17 @@ from datetime import datetime
 folder_path = os.path.dirname(__file__)
 sys.path.insert(1, folder_path)
 
+tables_list = ['cpu','memory','disk_space','events']
+
 # DATA BASE
 class DataBase():
 
-    def __init__(self) -> None:
+    def __init__(self, tables: list) -> None:
         """
             This database works with JSON format
         """
         self.db_name = 'databast.db'
-        self.tables = ['cpu','memory','disk_space','events']
+        self.tables = tables
         self.create_tables()
 
     def create_tables(self):
@@ -59,19 +61,16 @@ class DataBase():
             the data inside JSON request {table, server_name, value}
 
         """
-        if table in self.tables:
-            db_connect = sqlite3.connect(self.db_name)
-            cursor = db_connect.cursor()
-            
-            cursor.execute(f"SELECT *, oid  FROM {table}")
-            results = cursor.fetchall()
+        db_connect = sqlite3.connect(self.db_name)
+        cursor = db_connect.cursor()
+        
+        cursor.execute(f"SELECT *, oid  FROM {table}")
+        results = cursor.fetchall()
 
-            cursor.close()
-            db_connect.close()
+        cursor.close()
+        db_connect.close()
 
-            return results
-        else:
-            raise Exception(f'table {table} does not exist')
+        return results
 
     def insert(self, payload: json):
         """
@@ -108,13 +107,12 @@ class DataBase():
                                             'value': payload.get('value'),
                                             'disk_name': payload.get('disk_name')
                                             })
-            elif payload['table'] == 'events':
+            else: 
                 cursor.execute(f"INSERT INTO {payload['table']} VALUES (:value)",
                                             {
                                             'value': payload.get('value')
                                             })
-            else:
-                raise Exception(f'table {payload["table"]} does not exist')
+
         except:
             pass
         
@@ -140,16 +138,21 @@ async def root():
     return 'Just a page'
   
 @app.get("/fetch/table={table}")
-async def fetch(table: str):
-    return db.fetch(table)
+async def fetch_queries(table: str):
+    if table in tables_list:
+        return db.fetch(table)
+    else:
+        f'table "{table}" does not exist'
 
 @app.post("/insert")
-async def post_request(request: Request):
-    # db.POST_reminders(payload=payload)
-    payload = await request.json()
-    return db.insert(payload)
+async def post_query(request: Request):
+    if request['table'] in tables_list:
+        payload = await request.json()
+        return db.insert(payload)
+    else:
+        f'table "{request["table"]}" does not exist'
 
-db = DataBase()
+db = DataBase(tables=tables_list)
 api = API_Server()
 
 start_api_thread = threading.Thread(target=api.run_uvicorn)
