@@ -9,7 +9,7 @@ from datetime import datetime
 folder_path = os.path.dirname(__file__)
 sys.path.insert(1, folder_path)
 
-tables_list = ['cpu','memory','disk_space','events']
+tables_list = ['cpu','memory','disk','events']
 
 # DATA BASE
 class DataBase():
@@ -40,7 +40,7 @@ class DataBase():
                                 value TEXT NOT NULL
                                 )""")
 
-            cursor.execute("""CREATE TABLE IF NOT EXISTS disk_space (
+            cursor.execute("""CREATE TABLE IF NOT EXISTS disk (
                                 time_stamp TEXT NOT NULL,
                                 server_name TEXT NOT NULL,
                                 disk_name TEXT NOT NULL,
