@@ -4,7 +4,7 @@ import sqlite3
 
 template_dir = os.path.dirname(__file__)
 app = Flask(__name__, template_folder=template_dir)
-db_connect = sqlite3.connect("./API/fake_database.db")
+db_connect = sqlite3.connect("C:\inetpub\wwwroot\ToastApp\MonitorServer\API\fake_database.db")
 cursor = db_connect.cursor()
 cursor.execute("select * from cpu")
 temp = cursor.fetchall()
