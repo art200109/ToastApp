@@ -6,7 +6,7 @@ template_dir = os.path.dirname(__file__)
 app = Flask(__name__, template_folder=template_dir)
 
 def get_avg_by_server(metric,groupby="server_name"):
-    db_connect = sqlite3.connect(os.path.dirname(os.path.dirname(__file__))+"\\API\\fake_database.db")
+    db_connect = sqlite3.connect(os.path.join(os.path.dirname(os.path.dirname(__file__)),"API","fake_database.db"))
     db_connect.row_factory = sqlite3.Row
     cursor = db_connect.cursor()
     cursor.execute("select {},avg(value) from {} group by {}".format(groupby,metric,groupby))
