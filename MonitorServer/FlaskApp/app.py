@@ -8,31 +8,34 @@ import copy
 template_dir = os.path.dirname(__file__)
 app = Flask(__name__, template_folder=template_dir)
 
-# Route for handling the login page logic
-@app.route('/', methods=['GET', 'POST'])
-def login():
+def get_avg_by_server(metric,groupby="server_name"):
     db_connect = sqlite3.connect("fake_database.db")
     db_connect.row_factory = sqlite3.Row
     cursor = db_connect.cursor()
-    cursor.execute("select * from cpu")
+    cursor.execute("select server_name,avg(value) from {} group by {}".format(metric,groupby))
     sql_output = cursor.fetchall()
 
     cursor.close()
     db_connect.close()
+    print(sql_output)
 
     list_accumulator = []
     for item in sql_output:
         list_accumulator.append({k: item[k] for k in item.keys()})
-        
-    grouped_list = groupby(list_accumulator, key=itemgetter('server_name'))
+    
+    return list_accumulator
 
-    sums_dict = {}
-    for key,value in grouped_list:
-        leni = len(list(copy.deepcopy(value)))
-        summi = sum(float(d['value']) for d in value)
-        sums_dict[key] = float(summi/leni)
 
-    return sums_dict
+# Route for handling the login page logic
+@app.route('/', methods=['GET', 'POST'])
+def login():
+    metrics = { "cpu":{},"memory":{}}
+    for key in metrics:
+        metrics[key] = get_avg_by_server(key)
+    
+    metrics["disk"] = get_avg_by_server("disk","server_name, disk_name")
+    
+    return metrics
 
 
 if __name__ == "__main__":
