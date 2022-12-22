@@ -1,0 +1,58 @@
+<head>
+    <style>
+        .monitor {
+            background-color: red;
+            width: 100px;
+            height: 300px;
+            font-size: larger;
+        }
+    </style>
+</head>
+<body>
+    {% for key,value in metrics.items() %}
+        <h1>{{ key }}</h1>
+        <table>
+            <tr>
+                {% for item in metrics[key] %}
+                    <th> {{ item["server_name"] }} </th>
+                {% endfor %}
+            </tr>
+            <tr>
+                {% for item in metrics[key] %}
+                <td class="monitor"> {{ item["avg(value)"] }} </td>
+                {% endfor %}
+            </tr>
+        </table>
+        <br>
+    {% endfor %}
+    
+    <h1>DISK</h1>
+    <table>
+        <tr>
+            {% for key,value in disk_stats.items() %}
+                <th> {{ key }} </th>
+            {% endfor %}
+        </tr>
+        <tr>
+            {% for key,value in disk_stats.items() %}
+                <td>
+                    <p>
+                        {% for row in value %}
+                            {{ row }} <br>
+                        {% endfor %}
+                    </p>
+                </td>
+            {% endfor %}
+        </tr>
+    </table>
+
+    <h1>Applicative Events</h1>
+    <p>
+        asdasd<br>
+        sad<br>
+        asd<br>
+        asd<br>
+        asdasdasd<br>
+        asdasd<br>
+    </p>
+</body>
