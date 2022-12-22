@@ -9,7 +9,7 @@
     </style>
 </head>
 <body>
-    {% for key,value in metrics %}
+    {% for key,value in metrics.items() %}
         <h1>{{ key }}</h1>
         <table>
             <tr>
@@ -29,12 +29,12 @@
     <h1>DISK</h1>
     <table>
         <tr>
-            {% for key,value in disk_stats %}
+            {% for key,value in disk_stats.items() %}
                 <th> {{ key }} </th>
             {% endfor %}
         </tr>
         <tr>
-            {% for key,value in disk_stats %}
+            {% for key,value in disk_stats.items() %}
                 <td>
                     <p>
                         {{ value }}
