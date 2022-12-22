@@ -12,7 +12,7 @@ def get_avg_by_server(metric,groupby="server_name"):
     db_connect = sqlite3.connect("fake_database.db")
     db_connect.row_factory = sqlite3.Row
     cursor = db_connect.cursor()
-    cursor.execute("select server_name,avg(value) from {} group by {}".format(metric,groupby))
+    cursor.execute("select {},avg(value) from {} group by {}".format(groupby,metric,groupby))
     sql_output = cursor.fetchall()
 
     cursor.close()
