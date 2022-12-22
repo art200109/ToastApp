@@ -37,7 +37,9 @@
             {% for key,value in disk_stats.items() %}
                 <td>
                     <p>
-                        {{ value }}
+                        {% for row in value %}
+                            {{ row }} <br>
+                        {% endfor %}
                     </p>
                 </td>
             {% endfor %}
