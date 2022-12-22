@@ -30,9 +30,12 @@ def login():
     for key in metrics:
         metrics[key] = get_avg_by_server(key)
     
-    metrics["disk"] = get_avg_by_server("disk","server_name, disk_name")
-    
-    return render_template("index.html", metrics=metrics)
+    disk_stats = get_avg_by_server("disk","server_name, disk_name")
+    fixed_disk_stats = {}
+    for server in disk_stats:
+        fixed_disk_stats[server["server_name"]] += "{} - {}<br>".format(server["disk_name"], server["avg(value)"])
+
+    return render_template("index.html", metrics=metrics, disk_stats=fixed_disk_stats)
 
 
 if __name__ == "__main__":
