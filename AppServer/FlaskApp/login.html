@@ -8,21 +8,13 @@
     <div class="container">
       <h1>Please login</h1>
       <br>
-      <form class="login">
-        <input type="text" placeholder="Username">
-        <input type="password" placeholder="Password">
-        <button>Login</button>
-      </form>
-      
-      <a href="https://codepen.io/davinci/" target="_blank">check my other pens</a>
-
-      <!-- <form action="" method="post">
+      <form action="" method="post">
         <input type="text" placeholder="Username" name="username" value="{{
           request.form.username }}">
          <input type="password" placeholder="Password" name="password" value="{{
           request.form.password }}">
         <input class="btn btn-default" type="submit" value="Login">
-      </form> -->
+      </form>
       {% if error %}
         <p class="error"><strong>Error:</strong> {{ error }}
       {% endif %}
