@@ -13,8 +13,8 @@
 
     <table>
         <tr>
-            {% for key,value in metrics["cpu"] %}
-                <th> {{ key }} </th>
+            {% for item in metrics["cpu"] %}
+                <th> {{ key["server_name"] }} </th>
             {% endfor %}
         </tr>
         <tr>
