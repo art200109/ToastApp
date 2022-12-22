@@ -1,9 +1,6 @@
 from flask import Flask, render_template, redirect, url_for, request
 import os
 import sqlite3
-from operator import itemgetter
-from itertools import groupby
-import copy
 
 template_dir = os.path.dirname(__file__)
 app = Flask(__name__, template_folder=template_dir)
@@ -35,7 +32,7 @@ def login():
     
     metrics["disk"] = get_avg_by_server("disk","server_name, disk_name")
     
-    return metrics
+    return render_template("index.html", metrics=metrics)
 
 
 if __name__ == "__main__":

@@ -10,11 +10,12 @@
 </head>
 <body>
     <h1>RAM</h1>
+
     <table>
         <tr>
-            <th>server1</th>
-            <th>server2</th>
-            <th>server3</th>
+            {% for key,value in metrics["cpu"] %}
+                <th> {{ key }} </th>
+            {% endfor %}
         </tr>
         <tr>
             <td class="monitor">
