@@ -6,7 +6,7 @@ template_dir = os.path.dirname(__file__)
 app = Flask(__name__, template_folder=template_dir)
 
 def get_avg_by_server(metric,groupby="server_name"):
-    db_connect = sqlite3.connect(os.path.join(os.path.dirname(os.path.dirname(__file__)),"API","fake_database.db"))
+    db_connect = sqlite3.connect(os.path.join(os.path.dirname(os.path.dirname(app.instance_path)),"API","fake_database.db"))
     db_connect.row_factory = sqlite3.Row
     cursor = db_connect.cursor()
     cursor.execute("select {},avg(value) from {} group by {}".format(groupby,metric,groupby))
@@ -26,7 +26,6 @@ def get_avg_by_server(metric,groupby="server_name"):
 # Route for handling the login page logic
 @app.route('/', methods=['GET', 'POST'])
 def login():
-    #return os.path.dirname(os.path.dirname(app.instance_path))
     metrics = { "cpu":{},"memory":{}}
     for key in metrics:
         metrics[key] = get_avg_by_server(key)
