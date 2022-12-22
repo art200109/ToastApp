@@ -20,6 +20,7 @@ class DataBase():
         """
         self.db_name = 'fake_database.db'
         self.tables = tables
+        self.max_entries= 1000
         self.create_tables()
 
     def create_tables(self):
@@ -49,7 +50,7 @@ class DataBase():
 
             cursor.execute("""CREATE TABLE IF NOT EXISTS events (
                                 time_stamp TEXT NOT NULL,
-                                value TEXT PRIMARY KEY NOT NULL
+                                value TEXT NOT NULL
                                 )""")
             
             cursor.close()
@@ -68,7 +69,8 @@ class DataBase():
         db_connect = sqlite3.connect(self.db_name)
         cursor = db_connect.cursor()
         
-        cursor.execute(f"SELECT oid, * FROM {table}")
+        
+        cursor.execute(f"SELECT * FROM {table}")
         results = cursor.fetchall()
 
         cursor.close()
@@ -89,8 +91,16 @@ class DataBase():
         db_connect = sqlite3.connect(self.db_name)
         cursor = db_connect.cursor()
 
+        min_q = cursor.execute(f"SELECT MIN(rowid) FROM {payload['table']}").fetchone()[0]
+        max_q = cursor.execute(f"SELECT MAX(rowid) FROM {payload['table']}").fetchone()[0]
+
+        if min_q is not None and max_q is not None:
+            if self.max_entries == (max_q - min_q):
+                cursor.execute(f"DELETE from {payload['table']} WHERE rowid={min_q}")
+
         try:
             if payload['table'] == 'cpu':
+                
                 cursor.execute(f"INSERT INTO {payload['table']} VALUES (:time_stamp, :server_name, :value)",
                                             {
                                             'time_stamp': datetime.now().strftime("%d/%m/%y %H:%M:%S.%f"),
@@ -119,10 +129,12 @@ class DataBase():
                                             'value': payload.get('value')
                                             })
 
-        except:
+        except Exception as e:
+            print(e)
             pass
         
         db_connect.commit()
+
         cursor.close()
         db_connect.close()
 
