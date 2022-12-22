@@ -26,7 +26,7 @@ def get_avg_by_server(metric,groupby="server_name"):
 # Route for handling the login page logic
 @app.route('/', methods=['GET', 'POST'])
 def login():
-    return os.path.dirname(os.path.dirname(__file__))
+    return os.path.dirname(os.path.dirname(app.instance_path))
     metrics = { "cpu":{},"memory":{}}
     for key in metrics:
         metrics[key] = get_avg_by_server(key)
