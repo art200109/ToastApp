@@ -69,6 +69,7 @@ class DataBase():
         db_connect = sqlite3.connect(self.db_name)
         cursor = db_connect.cursor()
         
+        
         cursor.execute(f"SELECT * FROM {table}")
         results = cursor.fetchall()
 
