@@ -88,7 +88,7 @@ class DataBase():
             the data inside JSON request {table={'cpu', 'memory', 'disk_space', 'events'} , server_name, value}
 
         """
-        db_connect = sqlite3.connect(self.db_name)
+        db_connect = sqlite3.connect(os.join(os.path.dirname(__file__),self.db_name))
         cursor = db_connect.cursor()
 
         min_q = cursor.execute(f"SELECT MIN(rowid) FROM {payload['table']}").fetchone()[0]
