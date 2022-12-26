@@ -30,7 +30,7 @@ def log():
 
     win32evtlogutil.ReportEvent(
         DUMMY_EVT_APP_NAME, DUMMY_EVT_ID,
-        eventType=win32evtlog.EVENTLOG_WARNING_TYPE, strings="אחי הכל סבבה")
+        eventType=win32evtlog.EVENTLOG_WARNING_TYPE, strings=["אחי הכל סבבה"])
 
 
 username = ""
