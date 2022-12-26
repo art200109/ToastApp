@@ -49,14 +49,14 @@ template_dir = os.path.dirname(__file__)
 app = Flask(__name__, template_folder=template_dir)
 
 
-windows_handler = NTEventLogHandler(
-    appname="Toast App"
-)
-windows_handler.setLevel(logging.DEBUG)
+#windows_handler = NTEventLogHandler(
+#    appname="Toast App"
+#)
+#windows_handler.setLevel(logging.DEBUG)
 
-app.logger.addHandler(windows_handler)
-root.addHandler(default_handler)
-root.addHandler(windows_handler)
+#app.logger.addHandler(windows_handler)
+#root.addHandler(default_handler)
+#root.addHandler(windows_handler)
 
 @app.route("/home")
 def home():
@@ -70,6 +70,7 @@ def home():
 @app.route('/', methods=['GET', 'POST'])
 def login():
     global username
+    log()
     error = None
     if request.method == 'POST':
         username = request.form['username']
@@ -80,7 +81,6 @@ def login():
         if user == "null" or user["password"] != password:
             error = 'Invalid Credentials. Please try again.'
         else:
-            #log()
             return redirect(url_for('home'))
     return render_template('login.html', error=error)
 
