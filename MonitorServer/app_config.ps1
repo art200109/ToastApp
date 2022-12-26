@@ -4,6 +4,8 @@
 
 . $PSScriptRoot\..\General_Scripts\InstallAgent.ps1
 
+pip install -r .\API\requirments.txt
+
 . $PSScriptRoot\..\General_Scripts\InstallNSSM.ps1
 
 Config-NSSM -serviceName "Sblunk" -appPath $(Resolve-Path ".\API\api_server.py").path
