@@ -1,4 +1,6 @@
 yum install -y python3
+pip install -r ../MonitoringAgent/requirements.txt
+
 cp ../MonitoringAgent/nix_sblunk_uf.service  /etc/systemd/system/
 
 systemctl daemon-reload
