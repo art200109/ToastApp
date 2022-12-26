@@ -16,7 +16,7 @@ class CustomHandler(logging.Handler):
     def emit(self, record):
         log_entry = self.format(record)
         # some code....
-        url = 'url'
+        url = 'http://toast-monitor.westeurope.cloudapp.azure.com:8000/insert'
         # some code....
         return requests.post(url, headers={"Content-type": "application/json"},json={"table":"events", "server_name":"<HOST>", "value": log_entry}).content
 
