@@ -16,3 +16,5 @@ systemctl stop firewalld
 
 yum install -y git
 git clone https://github.com/art200109/ToastApp.git
+
+./InstallAgent.sh

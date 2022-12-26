@@ -1,0 +1,11 @@
+[Unit]
+Description=Sblunk Enterbrise Unix Server
+After=multi-user.target
+
+[Service]
+Type=simple
+Restart=always
+ExecStart=/usr/bin/python3 /home/azureuser/ToastApp/MonitoringAgent/app.py
+
+[Install]
+WantedBy=multi-user.target
