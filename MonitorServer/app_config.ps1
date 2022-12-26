@@ -4,7 +4,7 @@
 
 . $PSScriptRoot\..\General_Scripts\InstallAgent.ps1
 
-pip install -r .\API\requirments.txt
+pip install -r .\API\requirements.txt
 
 . $PSScriptRoot\..\General_Scripts\InstallNSSM.ps1
 

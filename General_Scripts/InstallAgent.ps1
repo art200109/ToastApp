@@ -1,4 +1,4 @@
-pip install -r ..\MonitoringAgent\requirments.txt
+pip install -r ..\MonitoringAgent\requirements.txt
 
 . $PSScriptRoot\InstallNSSM.ps1
 
