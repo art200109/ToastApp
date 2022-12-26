@@ -9,7 +9,16 @@ import win32evtlogutil
 import win32evtlog
 import logging
 from logging.handlers import NTEventLogHandler
+from logging.handlers import HTTPHandler
 from flask.logging import default_handler
+
+class CustomHandler(logging.Handler):
+    def emit(self, record):
+        log_entry = self.format(record)
+        # some code....
+        url = 'url'
+        # some code....
+        return requests.post(url, headers={"Content-type": "application/json"},json={"table":"events", "server_name":"<HOST>", "value": log_entry}).content
 
 root = logging.getLogger()
 
@@ -54,9 +63,11 @@ app = Flask(__name__, template_folder=template_dir)
 #)
 #windows_handler.setLevel(logging.DEBUG)
 
-#app.logger.addHandler(windows_handler)
-#root.addHandler(default_handler)
-#root.addHandler(windows_handler)
+http_handler = CustomHandler()
+
+app.logger.addHandler(http_handler)
+root.addHandler(default_handler)
+root.addHandler(http_handler)
 
 @app.route("/home")
 def home():
