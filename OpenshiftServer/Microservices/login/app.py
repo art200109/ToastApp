@@ -7,7 +7,7 @@ from bson import json_util, ObjectId
 import json
 
 client = MongoClient()
-client = MongoClient('external-mysql-service.toast.svc', 27017)
+client = MongoClient('external-mysql-service.toast.svc', 27017,username="artume",password=os.environ["user"])
 
 app = Flask(__name__)
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
