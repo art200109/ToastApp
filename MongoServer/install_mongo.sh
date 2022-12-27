@@ -16,3 +16,5 @@ systemctl enable mongod
 #firewall-cmd --reload
 
 mongorestore --drop ./dump
+
+mongo < ./mongo_settings.js
