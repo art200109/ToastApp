@@ -25,7 +25,7 @@ sed "s/<Apass>/$Apass/g" ./mongo_settings1.js >./mongo_settings2.js
 
 mongosh < ./mongo_settings2.js
 
-cat << EOF >/etc/mongod.conf
+cat << EOF >> /etc/mongod.conf
 security:
     authorization: enabled
 EOF
