@@ -17,4 +17,10 @@ systemctl enable mongod
 
 mongorestore --drop ./dump
 
-mongosh < ./mongo_settings.js
+read -sp 'Huri User password: ' Hpass
+read -sp 'Artume User password: ' Apass
+
+sed "s/<Hpass>/$Hpass/g" ./mongo_settings.js > ./mongo_settings1.js
+sed "s/<Apass>/$Apass/g" ./mongo_settings1.js >./mongo_settings2.js
+
+mongosh < ./mongo_settings2.js
