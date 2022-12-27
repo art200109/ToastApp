@@ -17,4 +17,4 @@ systemctl enable mongod
 
 mongorestore --drop ./dump
 
-mongo < ./mongo_settings.js
+mongosh < ./mongo_settings.js
