@@ -9,7 +9,7 @@ from datetime import datetime
 import requests
 
 client = MongoClient()
-client = MongoClient('external-mysql-service.toast.svc', 27017)
+client = MongoClient('external-mysql-service.toast.svc', 27017,username=os.environ["mongo_user"],password=os.environ["mongo_password"])
 
 menu_url = "http://menu.toast.svc:8080"
 inventory_url = "http://inventory.toast.svc:8080"
