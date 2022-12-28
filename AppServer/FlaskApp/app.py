@@ -21,7 +21,7 @@ class CustomHandler(logging.Handler):
 
 root = logging.getLogger()
 
-with open("codes.csv","r") as codes_file:
+with open("codes.txt","r") as codes_file:
     codes = codes_file.readlines()
 
 
