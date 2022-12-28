@@ -27,7 +27,7 @@ class DataBase():
             """
                 Create the tables inside the database
             """
-            db_connect = sqlite3.connect(self.db_name)
+            db_connect = sqlite3.connect(os.path.join(folder_path,self.db_name))
             cursor = db_connect.cursor()
             cursor.execute("""CREATE TABLE IF NOT EXISTS cpu (
                                 time_stamp TEXT NOT NULL,
@@ -66,7 +66,7 @@ class DataBase():
             the data inside JSON request {table, server_name, value}
 
         """
-        db_connect = sqlite3.connect(self.db_name)
+        db_connect = sqlite3.connect(os.path.join(folder_path,self.db_name))
         cursor = db_connect.cursor()
         
         
@@ -88,7 +88,7 @@ class DataBase():
             the data inside JSON request {table={'cpu', 'memory', 'disk_space', 'events'} , server_name, value}
 
         """
-        db_connect = sqlite3.connect(os.path.join(os.path.dirname(__file__),self.db_name))
+        db_connect = sqlite3.connect(os.path.join(folder_path,self.db_name))
         cursor = db_connect.cursor()
 
         min_q = cursor.execute(f"SELECT MIN(rowid) FROM {payload['table']}").fetchone()[0]
