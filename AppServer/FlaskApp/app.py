@@ -21,6 +21,9 @@ class CustomHandler(logging.Handler):
 
 root = logging.getLogger()
 
+with open("codes.csv","r") as codes_file:
+    codes = codes_file.readlines()
+
 
 
 import requests
@@ -31,20 +34,17 @@ def create_minishift_url(service):
     return "http://"+service+"-toast."+minishift_ip+".nip.io"
 
 
-def log():
+def log(message):
     logging.debug("debug log")
     DUMMY_EVT_APP_NAME = "Toast App"
     DUMMY_EVT_ID = 1234
 
     win32evtlogutil.ReportEvent(
         DUMMY_EVT_APP_NAME, DUMMY_EVT_ID,
-        eventType=win32evtlog.EVENTLOG_WARNING_TYPE, strings=["אחי הכל סבבה"])
+        eventType=win32evtlog.EVENTLOG_ERROR_TYPE, strings=[message])
 
 
 username = ""
-#p = subprocess.Popen("minishift ip", stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.DEVNULL)
-#out, err = p.communicate()
-##minishift_ip = out.decode(sys.stdout.encoding).strip()
 
 minishift_ip = socket.gethostbyname("toast-ocp.westeurope.cloudapp.azure.com")
 
@@ -55,12 +55,6 @@ order_url = create_minishift_url("order")
 
 template_dir = os.path.dirname(__file__)
 app = Flask(__name__, template_folder=template_dir)
-
-
-#windows_handler = NTEventLogHandler(
-#    appname="Toast App"
-#)
-#windows_handler.setLevel(logging.DEBUG)
 
 http_handler = CustomHandler()
 
@@ -90,6 +84,7 @@ def login():
             user = json.load(url)
         if user == "null" or user["password"] != password:
             error = 'Invalid Credentials. Please try again.'
+            log(codes[0])
         else:
             return redirect(url_for('home'))
     return render_template('login.html', error=error)
