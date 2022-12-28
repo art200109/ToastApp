@@ -74,7 +74,6 @@ def home():
 @app.route('/', methods=['GET', 'POST'])
 def login():
     global username
-    log()
     error = None
     if request.method == 'POST':
         username = request.form['username']
