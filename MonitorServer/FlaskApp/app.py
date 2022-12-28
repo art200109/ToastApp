@@ -43,10 +43,13 @@ def login():
     cursor = db_connect.cursor()
     cursor.execute("select * from events")
     events = cursor.fetchall()
+    parsed_events = []
+    for item in events:
+        parsed_events.append({k: item[k] for k in item.keys()})
 
     cursor.close()
     db_connect.close()
-    return render_template("index.html", metrics=metrics, disk_stats=fixed_disk_stats,events=events)
+    return render_template("index.html", metrics=metrics, disk_stats=fixed_disk_stats,events=parsed_events)
 
 
 if __name__ == "__main__":
