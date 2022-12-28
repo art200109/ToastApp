@@ -61,6 +61,7 @@ http_handler = CustomHandler()
 app.logger.addHandler(http_handler)
 root.addHandler(default_handler)
 root.addHandler(http_handler)
+logging.setLoggerClass(http_handler)
 
 @app.route("/home")
 def home():
