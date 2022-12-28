@@ -5,9 +5,9 @@ import sys
 
 template_dir = os.path.dirname(__file__)
 app = Flask(__name__, template_folder=template_dir)
+path = sys.argv[1] if len(sys.argv) > 1 else os.getcwd()
 
 def get_avg_by_server(metric,groupby="server_name"):
-    path = sys.argv[1] if len(sys.argv) > 1 else os.getcwd()
     db_connect = sqlite3.connect(os.path.join(os.path.dirname(path),"API","fake_database.db"))
     db_connect.row_factory = sqlite3.Row
     cursor = db_connect.cursor()
@@ -16,7 +16,6 @@ def get_avg_by_server(metric,groupby="server_name"):
 
     cursor.close()
     db_connect.close()
-    print(sql_output)
 
     list_accumulator = []
     for item in sql_output:
@@ -39,7 +38,15 @@ def login():
             fixed_disk_stats[server["server_name"]] = []
         fixed_disk_stats[server["server_name"]].append("{} - {}".format(server["disk_name"], server["avg(value)"]))
 
-    return render_template("index.html", metrics=metrics, disk_stats=fixed_disk_stats)
+    db_connect = sqlite3.connect(os.path.join(os.path.dirname(path),"API","fake_database.db"))
+    db_connect.row_factory = sqlite3.Row
+    cursor = db_connect.cursor()
+    cursor.execute("select * from events")
+    events = cursor.fetchall()
+
+    cursor.close()
+    db_connect.close()
+    return render_template("index.html", metrics=metrics, disk_stats=fixed_disk_stats,events=events)
 
 
 if __name__ == "__main__":

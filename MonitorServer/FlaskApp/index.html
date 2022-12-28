@@ -88,12 +88,9 @@ body {margin:0;}
 
     <h1>Applicative Events</h1>
     <p>
-        asdasd<br>
-        sad<br>
-        asd<br>
-        asd<br>
-        asdasdasd<br>
-        asdasd<br>
+        {% for event in events %}
+            {{ event }} <br>
+        {% endfor %}
     </p>
-    </div>
+    
 </body>
