@@ -81,7 +81,7 @@ def login():
 
         with urllib.request.urlopen(login_url+"/"+username) as url:
             user = json.load(url)
-        if user == "null" or user["password"] != password:
+        if user is None or user == "null" or user["password"] != password:
             error = 'Invalid Credentials. Please try again.'
             log(codes[0])
         else:
