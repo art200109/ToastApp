@@ -131,7 +131,7 @@ items:
           name: python:3.6
           namespace: openshift
       type: Source
-triggers:
+  triggers:
     - github:
         secret: 6Un3wrBM2-6BssH2gYdb
       type: GitHub
