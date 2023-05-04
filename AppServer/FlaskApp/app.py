@@ -56,8 +56,17 @@ order_url = create_minishift_url("order")
 template_dir = os.path.dirname(__file__)
 app = Flask(__name__, template_folder=template_dir)
 
-http_handler = CustomHandler()
+httpHandler = CustomHandler()
 
+log = logging.getLogger('')
+log.setLevel(logging.INFO)
+
+httpHandler.setLevel(logging.INFO)
+
+# add handler to logger
+log.addHandler(httpHandler)
+
+log.info('Hello world!')
 #app.logger.handlers = (http_handler)
 #root.handlers = (default_handler)
 #root.handlers = (http_handler)
