@@ -34,7 +34,7 @@ def create_minishift_url(service):
     return "http://"+service+"-toast."+minishift_ip+".nip.io"
 
 
-def log(message):
+def evt_log(message):
     logging.debug("debug log")
     DUMMY_EVT_APP_NAME = "Toast App"
     DUMMY_EVT_ID = 1234
@@ -93,7 +93,7 @@ def login():
             user = json.load(url)
         if user is None or user == "null" or user["password"] != password:
             error = 'Invalid Credentials. Please try again.'
-            log(codes[0])
+            evt_log(codes[0])
         else:
             return redirect(url_for('home'))
     return render_template('login.html', error=error)
