@@ -58,9 +58,9 @@ app = Flask(__name__, template_folder=template_dir)
 
 http_handler = CustomHandler()
 
-app.logger.handlers = (http_handler)
+#app.logger.handlers = (http_handler)
 #root.handlers = (default_handler)
-root.handlers = (http_handler)
+#root.handlers = (http_handler)
 #logging.setLoggerClass(CustomHandler)
 
 @app.route("/home")
