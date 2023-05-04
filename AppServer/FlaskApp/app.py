@@ -58,13 +58,14 @@ app = Flask(__name__, template_folder=template_dir)
 httpHandler = CustomHandler()
 
 log = logging.getLogger('')
-#log.setLevel(logging.INFO)
+log.setLevel(logging.INFO)
 
 httpHandler.setLevel(logging.INFO)
 
 # add handler to logger
 log.addHandler(httpHandler)
 
+log.info('Hello world!')
 #app.logger.handlers = (http_handler)
 #root.handlers = (default_handler)
 #root.handlers = (http_handler)
