@@ -23,6 +23,17 @@ items:
       type: Git
     strategy:
       sourceStrategy:
+        env:
+          - name: mongo_user
+            valueFrom:
+              secretKeyRef:
+                key: mongo_user
+                name: mongo-secrets
+          - name: mongo_password
+            valueFrom:
+              secretKeyRef:
+                key: mongo_password
+                name: mongo-secrets
         from:
           kind: ImageStreamTag
           name: python:3.6
@@ -58,6 +69,17 @@ items:
       type: Git
     strategy:
       sourceStrategy:
+        env:
+          - name: mongo_user
+            valueFrom:
+              secretKeyRef:
+                key: mongo_user
+                name: mongo-secrets
+          - name: mongo_password
+            valueFrom:
+              secretKeyRef:
+                key: mongo_password
+                name: mongo-secrets
         from:
           kind: ImageStreamTag
           name: python:3.6
@@ -93,12 +115,23 @@ items:
       type: Git
     strategy:
       sourceStrategy:
+        env:
+          - name: mongo_user
+            valueFrom:
+              secretKeyRef:
+                key: mongo_user
+                name: mongo-secrets
+          - name: mongo_password
+            valueFrom:
+              secretKeyRef:
+                key: mongo_password
+                name: mongo-secrets
         from:
           kind: ImageStreamTag
           name: python:3.6
           namespace: openshift
       type: Source
-    triggers:
+triggers:
     - github:
         secret: 6Un3wrBM2-6BssH2gYdb
       type: GitHub
@@ -128,6 +161,17 @@ items:
       type: Git
     strategy:
       sourceStrategy:
+        env:
+          - name: mongo_user
+            valueFrom:
+              secretKeyRef:
+                key: mongo_user
+                name: mongo-secrets
+          - name: mongo_password
+            valueFrom:
+              secretKeyRef:
+                key: mongo_password
+                name: mongo-secrets
         from:
           kind: ImageStreamTag
           name: python:3.6
