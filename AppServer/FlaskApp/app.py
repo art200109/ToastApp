@@ -41,7 +41,7 @@ def evt_log(message):
 
 username = ""
 
-minishift_ip = socket.gethostbyname("toast-ocp.westeurope.cloudapp.azure.com")
+minishift_ip = socket.gethostbyname("toast-mongo.westeurope.cloudapp.azure.com")
 
 
 menu_url = create_minishift_url("menu")
