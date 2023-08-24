@@ -84,7 +84,7 @@ def login():
             evt_log(codes[0])
         else:
             return redirect(url_for('home'))
-    return render_template('login.html', error=error)
+    return render_template('login/dist/index.html', error=error)
 
 
 @app.route("/order", methods=['POST'])
