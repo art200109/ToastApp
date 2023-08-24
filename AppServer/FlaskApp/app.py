@@ -11,6 +11,8 @@ import logging
 from logging.handlers import NTEventLogHandler
 from logging.handlers import HTTPHandler
 from flask.logging import default_handler
+import requests
+from flask import Flask, redirect, render_template, request, url_for
 
 class CustomHandler(logging.Handler):
     def emit(self, record):
@@ -23,12 +25,6 @@ root = logging.getLogger()
 
 with open("codes.txt","r",encoding="utf8") as codes_file:
     codes = codes_file.readlines()
-
-
-
-import requests
-from flask import Flask, redirect, render_template, request, url_for
-
 
 def create_minishift_url(service):
     return "http://"+service+"-toast."+minishift_ip+".nip.io"
@@ -58,17 +54,11 @@ app = Flask(__name__, template_folder=template_dir)
 httpHandler = CustomHandler()
 
 log = logging.getLogger('')
-#log.setLevel(logging.INFO)
 
 httpHandler.setLevel(logging.INFO)
 
 # add handler to logger
 log.addHandler(httpHandler)
-
-#app.logger.handlers = (http_handler)
-#root.handlers = (default_handler)
-#root.handlers = (http_handler)
-#logging.setLoggerClass(CustomHandler)
 
 @app.route("/home")
 def home():
