@@ -9,4 +9,8 @@ NET LOCALGROUP "Administrators" "IUSR" /ADD
 ConvertTo-WebApplication -PSPath 'IIS:\Sites\Default Web Site\assets'
 Remove-WebHandler FlaskHandler -PSPath 'IIS:\Sites\Default Web Site\assets'
 
+ConvertTo-WebApplication -PSPath 'IIS:\Sites\Default Web Site\login'
+Remove-WebHandler FlaskHandler -PSPath 'IIS:\Sites\Default Web Site\login'
+
+
 . $PSScriptRoot\..\General_Scripts\ChangeRDP.ps1
