@@ -47,6 +47,7 @@ minishift_ip = socket.gethostbyname("toast-mongo.westeurope.cloudapp.azure.com")
 menu_url = create_minishift_url("menu")
 login_url = create_minishift_url("login")
 order_url = create_minishift_url("order")
+inventory_url = create_minishift_url("inventory")
 
 template_dir = os.path.dirname(__file__)
 app = Flask(__name__, template_folder=template_dir)
@@ -66,8 +67,14 @@ def home():
         foods = json.load(url)
     return render_template("user.html", foods=foods, username=username)
 
-# Route for handling the login page logic
 
+@app.route("/admin")
+def home():
+    with urllib.request.urlopen(inventory_url) as url:
+        foods = json.load(url)
+    return render_template("admin.html", foods=foods, username=username)
+
+# Route for handling the login page logic
 
 @app.route('/', methods=['GET', 'POST'])
 def login():
