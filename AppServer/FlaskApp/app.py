@@ -95,7 +95,10 @@ def login():
             error = 'Invalid Credentials. Please try again.'
             evt_log(codes[0])
         else:
-            return redirect(url_for('home'))
+            if(user["role"] == "user"):
+                return redirect(url_for('home'))
+            else:
+                return redirect(url_for('admin'))
     return render_template('login/dist/index.html', error=error)
 
 
