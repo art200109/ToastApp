@@ -243,15 +243,12 @@
                       alt="Wendy's Chicken"
                       class="w-100"
                     />
-                    {% if "discount" in food %}
-                    <div class="badge">-{{ food.discount }}%</div>
-                    {% endif %}
 
                     <button
                       onclick="order('{{ food._id['$oid'] }}',false)"
                       class="btn food-menu-btn"
                     >
-                      Order Now
+                      Get Some More
                     </button>
                   </div>
 
@@ -262,7 +259,7 @@
                   <h3 class="h3 card-title">{{ food.name }}</h3>
 
                   <div class="price-wrapper">
-                    <p class="price-text">Price:</p>
+                    <p class="price-text">Current Quantity:</p>
 
                     <data class="price" value="{{ food.amount }}"
                       >${{ food.amount }}</data
