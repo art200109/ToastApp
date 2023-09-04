@@ -69,7 +69,7 @@ def home():
 
 
 @app.route("/admin")
-def home():
+def admin():
     with urllib.request.urlopen(inventory_url) as url:
         foods = json.load(url)
     return render_template("admin.html", foods=foods, username=username)
