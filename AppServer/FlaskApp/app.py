@@ -63,16 +63,20 @@ log.addHandler(httpHandler)
 
 @app.route("/home")
 def home():
-    with urllib.request.urlopen(menu_url) as url:
-        foods = json.load(url)
-    return render_template("user.html", foods=foods, username=username)
+    if(username):
+        with urllib.request.urlopen(menu_url) as url:
+            foods = json.load(url)
+        return render_template("user.html", foods=foods, username=username)
+    return redirect(url_for('/'))
 
 
 @app.route("/admin")
 def admin():
-    with urllib.request.urlopen(inventory_url) as url:
-        foods = json.load(url)
-    return render_template("admin.html", foods=foods, username=username)
+    if(username):
+        with urllib.request.urlopen(inventory_url) as url:
+            foods = json.load(url)
+        return render_template("admin.html", foods=foods, username=username)
+    return redirect(url_for('/'))
 
 # Route for handling the login page logic
 
