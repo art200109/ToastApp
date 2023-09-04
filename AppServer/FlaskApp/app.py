@@ -64,7 +64,7 @@ log.addHandler(httpHandler)
 def home():
     with urllib.request.urlopen(menu_url) as url:
         foods = json.load(url)
-    return render_template("index.html", foods=foods, username=username)
+    return render_template("user.html", foods=foods, username=username)
 
 # Route for handling the login page logic
 
