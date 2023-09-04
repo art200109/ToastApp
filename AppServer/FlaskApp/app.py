@@ -67,7 +67,7 @@ def home():
         with urllib.request.urlopen(menu_url) as url:
             foods = json.load(url)
         return render_template("user.html", foods=foods, username=username)
-    return redirect(url_for('/'))
+    return redirect(url_for('login'))
 
 
 @app.route("/admin")
@@ -76,10 +76,11 @@ def admin():
         with urllib.request.urlopen(inventory_url) as url:
             foods = json.load(url)
         return render_template("admin.html", foods=foods, username=username)
-    return redirect(url_for('/'))
+    return redirect(url_for('login'))
 
 # Route for handling the login page logic
 
+@app.route('/login', methods=['GET', 'POST'])
 @app.route('/', methods=['GET', 'POST'])
 def login():
     global username
