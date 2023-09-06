@@ -17,7 +17,7 @@ from flask import Flask, redirect, render_template, request, url_for
 class CustomHandler(logging.Handler):
     def emit(self, record):
         log_entry = self.format(record)
-        url = "http://toast-splunk.westeurope.cloudapp.azure.com:8088/services/collector/event"
+        url = "http://toast-splunk.westeurope.cloudapp.azure.com:8088/services/collector/raw"
         #url = 'http://toast-monitor.westeurope.cloudapp.azure.com:8000/insert'
         print(log_entry)
         return requests.post(url, headers={"Content-type": "application/json","Authorization": "Splunk 0163e671-3e4f-45c5-8906-770c20e98408"},json={"table":"events", "server_name":"toast-app.westeurope.cloudapp.azure.com", "event": log_entry}).content
