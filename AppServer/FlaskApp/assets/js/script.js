@@ -122,7 +122,7 @@ async function order(product_id, confirmed) {
 }
 
 async function inv_update(product_name) {
-  let delta = prompt("How many '"+product_name+"' to add?", 1);
+  let delta = parseInt(prompt("How many '"+product_name+"' to add?", 1));
   try {
     const response = await fetch("/update_inv", {
       method: "post",
