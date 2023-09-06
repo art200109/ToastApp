@@ -1,6 +1,4 @@
-'use strict';
-
-
+"use strict";
 
 /**
  * navbar toggle
@@ -22,8 +20,6 @@ for (let i = 0; i < navbarLinks.length; i++) {
   });
 }
 
-
-
 /**
  * header sticky & back to top
  */
@@ -40,8 +36,6 @@ window.addEventListener("scroll", function () {
     backTopBtn.classList.remove("active");
   }
 });
-
-
 
 /**
  * search box toggle
@@ -61,8 +55,6 @@ for (let i = 0; i < searchBoxElems.length; i++) {
   });
 }
 
-
-
 /**
  * move cycle on scroll
  */
@@ -73,7 +65,6 @@ let deliveryBoyMove = -80;
 let lastScrollPos = 0;
 
 window.addEventListener("scroll", function () {
-
   let deliveryBoyTopPos = deliveryBoy.getBoundingClientRect().top;
 
   if (deliveryBoyTopPos < 500 && deliveryBoyTopPos > -250) {
@@ -88,49 +79,63 @@ window.addEventListener("scroll", function () {
     lastScrollPos = activeScrollPos;
     deliveryBoy.style.transform = `translateX(${deliveryBoyMove}px)`;
   }
-
 });
 
-var filterbuttons = document.querySelectorAll(".filter-btn") 
+var filterbuttons = document.querySelectorAll(".filter-btn");
 for (let i = 0; i < filterbuttons.length; i++) {
   filterbuttons[i].addEventListener("click", function () {
-	document.querySelector(".filter-btn.active").classList.remove('active')
-    this.classList.add('active');
-	var filter = this.innerText
-	var menu_items = document.querySelectorAll(".food-menu-card-li")
-	for (let j= 0; j < menu_items.length; j++) {
-		if(filter == "All" || menu_items[j].classList.contains("category-"+filter))
-		{
-			menu_items[j].style.display = "block"
-		}
-		else
-		{
-			menu_items[j].style.display = "none"
-		}
-	}
-
+    document.querySelector(".filter-btn.active").classList.remove("active");
+    this.classList.add("active");
+    var filter = this.innerText;
+    var menu_items = document.querySelectorAll(".food-menu-card-li");
+    for (let j = 0; j < menu_items.length; j++) {
+      if (
+        filter == "All" ||
+        menu_items[j].classList.contains("category-" + filter)
+      ) {
+        menu_items[j].style.display = "block";
+      } else {
+        menu_items[j].style.display = "none";
+      }
+    }
   });
 }
 
-async function order(product_id, confirmed)
-{
-	try {     
-		const response = await fetch("/order", {
-			  method: 'post',
-			  headers: {
-			  'Accept': 'application/json',
-			  'Content-Type': 'application/json'
-			  },
-			  body: JSON.stringify({"product_id": product_id,"confirmed": confirmed})
-		});
-		if (!response.ok) {
-            throw Error(response.status);
-        } 
-		alert("Order placed succefully")
-  } catch(err) {
-	  if(err.message == "422")
-		  alert("Not Enough Ingridients :(")
-	  else
-		  alert("Somthing went wrong :(")
+async function order(product_id, confirmed) {
+  try {
+    const response = await fetch("/order", {
+      method: "post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ product_id: product_id, confirmed: confirmed }),
+    });
+    if (!response.ok) {
+      throw Error(response.status);
+    }
+    alert("Order placed succefully");
+  } catch (err) {
+    if (err.message == "422") alert("Not Enough Ingridients :(");
+    else alert("Somthing went wrong :(");
+  }
+}
+
+async function inv_update(product_name, delta) {
+  try {
+    const response = await fetch("/update_inv", {
+      method: "post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ product_name: product_name, delta: delta }),
+    });
+    if (!response.ok) {
+      throw Error(response.status);
+    }
+    alert("Inventory updated succefully");
+  } catch (err) {
+    alert("Somthing went wrong :(");
   }
 }

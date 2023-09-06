@@ -24,8 +24,18 @@ def update_item():
     })
     return 'success', 200
 
+@app.route("/<product_name>", methods=['PUT'])
+def update_item_amount(product_name):
+    data = request.get_json()
+    product = client.toast.inventory.find_one({ 'name': product_name})
 
-@app.route("/<product_name>")
+    client.toast.inventory.update_one({ "name": product_name }, {
+        "$set": {"amount":product["amount"] + data["delta"]}
+    })
+    return 'success', 200
+
+
+@app.route("/<product_name>", methods=['GET'])
 def item(product_name):
     return parse_mongo(client.toast.inventory.find_one({ 'name': product_name}))
 

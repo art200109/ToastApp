@@ -109,6 +109,13 @@ def order():
     resp = requests.post(order_url, json=data)
     return (resp.content, resp.status_code, resp.headers.items())
 
+@app.route("/update_inv", methods=['POST'])
+def update_inv():
+    data = request.get_json()
+
+    resp = requests.put("{}/{}".format(inventory_url,data["product_name"]), json=data)
+    return (resp.content, resp.status_code, resp.headers.items())
+
 
 if __name__ == "__main__":
     app.run(debug=True)
