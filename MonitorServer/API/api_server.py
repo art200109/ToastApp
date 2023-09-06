@@ -126,7 +126,7 @@ class DataBase():
                 cursor.execute(f"INSERT INTO {payload['table']} VALUES (:time_stamp, :value)",
                                             {
                                             'time_stamp': datetime.now().strftime("%d/%m/%y %H:%M:%S.%f"),
-                                            'value': payload.get('value')
+                                            'value': payload.get('_raw')
                                             })
 
         except Exception as e:
