@@ -136,6 +136,7 @@ async function inv_update(product_name) {
       throw Error(response.status);
     }
     alert("Inventory updated succefully");
+    location.reload()
   } catch (err) {
     alert("Somthing went wrong :(");
   }
