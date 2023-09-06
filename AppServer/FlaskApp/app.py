@@ -61,6 +61,7 @@ httpHandler.setLevel(logging.INFO)
 
 # add handler to logger
 log.addHandler(httpHandler)
+app.logger.addHandler(httpHandler)
 
 @app.route("/home")
 def home():
