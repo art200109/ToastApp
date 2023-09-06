@@ -85,6 +85,7 @@ def admin():
 @app.route('/', methods=['GET', 'POST'])
 def login():
     global username
+    logging.info("bdika bdika")
     error = None
     if request.method == 'POST':
         username = request.form['username']
