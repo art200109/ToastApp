@@ -1,35 +1,33 @@
 import json
 import os
 import socket
-import subprocess
-import sys
 import urllib.request
-from datetime import datetime
 import win32evtlogutil
 import win32evtlog
-import logging
-from logging.handlers import NTEventLogHandler
-from logging.handlers import HTTPHandler
-from flask.logging import default_handler
 import requests
 from flask import Flask, redirect, render_template, request, url_for
 
-class CustomHandler(logging.Handler):
-    def emit(self, record):
-        log_entry = self.format(record)
+
+def log(content):
         url = "http://toast-splunk.westeurope.cloudapp.azure.com:8088/services/collector/raw"
         #url = 'http://toast-monitor.westeurope.cloudapp.azure.com:8000/insert'
-        print(log_entry)
-        return requests.post(url, headers={"Content-type": "application/json","Authorization": "Splunk 0163e671-3e4f-45c5-8906-770c20e98408"},json={"table":"events", "server_name":"toast-app.westeurope.cloudapp.azure.com", "event": log_entry}).content
+        print(content)
+        return requests.post(
+                            url, 
+                             headers={
+                                "Content-type": "application/json",
+                                "Authorization": "Splunk 0163e671-3e4f-45c5-8906-770c20e98408"
+                            },
+                            json={
+                                "table":"events", 
+                                "server_name":"toast-app.westeurope.cloudapp.azure.com",
+                                "event": content
+                            }
+        ).content
 
-root = logging.getLogger()
-
-with open("codes.txt","r",encoding="utf8") as codes_file:
-    codes = codes_file.readlines()
 
 def create_minishift_url(service):
     return "http://"+service+"-toast."+minishift_ip+".nip.io"
-
 
 def evt_log(message):
     DUMMY_EVT_APP_NAME = "Toast App"
@@ -40,6 +38,9 @@ def evt_log(message):
         eventType=win32evtlog.EVENTLOG_ERROR_TYPE, strings=[message])
 
 
+with open("codes.txt","r",encoding="utf8") as codes_file:
+    codes = codes_file.readlines()
+    
 username = ""
 
 minishift_ip = socket.gethostbyname("toast-mongo.westeurope.cloudapp.azure.com")
@@ -52,16 +53,6 @@ inventory_url = create_minishift_url("inventory")
 
 template_dir = os.path.dirname(__file__)
 app = Flask(__name__, template_folder=template_dir)
-
-httpHandler = CustomHandler()
-
-log = logging.getLogger('')
-
-httpHandler.setLevel(logging.INFO)
-
-# add handler to logger
-log.addHandler(httpHandler)
-app.logger.addHandler(httpHandler)
 
 @app.route("/home")
 def home():
@@ -81,12 +72,10 @@ def admin():
     return redirect(url_for('login'))
 
 # Route for handling the login page logic
-
 @app.route('/login', methods=['GET', 'POST'])
 @app.route('/', methods=['GET', 'POST'])
 def login():
     global username
-    logging.info("bdika bdika")
     error = None
     if request.method == 'POST':
         username = request.form['username']
