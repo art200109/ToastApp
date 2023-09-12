@@ -7,13 +7,14 @@ import win32evtlog
 import requests
 from flask import Flask, redirect, render_template, request, url_for
 
+#log_url = "http://toast-splunk.westeurope.cloudapp.azure.com:8088/services/collector/raw"
+log_url = "http://toast-monitor.westeurope.cloudapp.azure.com:8000/insert"
+
 
 def log(content):
-        url = "http://toast-splunk.westeurope.cloudapp.azure.com:8088/services/collector/raw"
-        #url = 'http://toast-monitor.westeurope.cloudapp.azure.com:8000/insert'
         print(content)
         return requests.post(
-                            url, 
+                            log_url, 
                              headers={
                                 "Content-type": "application/json",
                                 "Authorization": "Splunk 0163e671-3e4f-45c5-8906-770c20e98408"
@@ -87,6 +88,13 @@ def login():
             error = 'Invalid Credentials. Please try again.'
             evt_log(codes[0])
         else:
+            login_evt = {
+                "type": "login",
+                "status": "success",
+                "user": username,
+                "role": user["role"]
+            }
+            log(json.dumps(login_evt))
             if(user["role"] == "user"):
                 return redirect(url_for('home'))
             else:
