@@ -1,7 +1,7 @@
 ﻿$app_path = "$PSScriptRoot\FlaskApp"
 
 . $PSScriptRoot\..\General_Scripts\InstallFlaskIIS.ps1
-C:\Python\python.exe -m pip install translate
+C:\Python\python.exe -m pip install googletrans==3.1.0a0
 
 NET LOCALGROUP "Administrators" "IUSR" /ADD
 

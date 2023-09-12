@@ -6,9 +6,9 @@ import win32evtlogutil
 import win32evtlog
 import requests
 from flask import Flask, redirect, render_template, request, url_for
-from translate import Translator
+from googletrans import Translator, constants
 
-translator= Translator(to_lang="he")
+translator = Translator()
 
 #log_url = "http://toast-splunk.westeurope.cloudapp.azure.com:8088/services/collector/raw"
 log_url = "http://toast-monitor.westeurope.cloudapp.azure.com:8000/insert"
@@ -84,7 +84,7 @@ def login():
     error = None
     if request.method == 'POST':
         username = request.form['username']
-        heb_username = translator.translate(username)
+        heb_username = translator.translate(username, dest="he").text
         password = request.form['password']
 
         with urllib.request.urlopen(login_url+"/"+username) as url:
