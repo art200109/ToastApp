@@ -6,6 +6,9 @@ import win32evtlogutil
 import win32evtlog
 import requests
 from flask import Flask, redirect, render_template, request, url_for
+from translate import Translator
+
+translator= Translator(to_lang="he")
 
 #log_url = "http://toast-splunk.westeurope.cloudapp.azure.com:8088/services/collector/raw"
 log_url = "http://toast-monitor.westeurope.cloudapp.azure.com:8000/insert"
@@ -43,6 +46,7 @@ with open("codes.txt","r",encoding="utf8") as codes_file:
     codes = codes_file.readlines()
     
 username = ""
+heb_username = ""
 
 minishift_ip = socket.gethostbyname("toast-mongo.westeurope.cloudapp.azure.com")
 
@@ -76,25 +80,27 @@ def admin():
 @app.route('/login', methods=['GET', 'POST'])
 @app.route('/', methods=['GET', 'POST'])
 def login():
-    global username
+    global username, heb_username
     error = None
     if request.method == 'POST':
         username = request.form['username']
+        heb_username = translator.translate(username)
         password = request.form['password']
 
         with urllib.request.urlopen(login_url+"/"+username) as url:
             user = json.load(url)
         if user is None or user == "null" or user["password"] != password:
             if user is None or user == "null":
-                error = 'User does not exist. Please try again.'
+                reason = 'User does not exist'
             else:
-                error = 'Wrong password. Please try again.'
+                reason = 'Wrong password'
+            error = reason + ", Please try again."
 
             login_evt = {
                 "type": "login",
                 "status": "failure",
                 "user": username,
-                "reason": error
+                "reason": reason
             }
             log(json.dumps(login_evt))
             evt_log(codes[0])
@@ -106,6 +112,8 @@ def login():
                 "role": user["role"]
             }
             log(json.dumps(login_evt))
+            evt_log(codes[1].format(heb_username))
+
             if(user["role"] == "user"):
                 return redirect(url_for('home'))
             else:

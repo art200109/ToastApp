@@ -1,6 +1,7 @@
 ﻿$app_path = "$PSScriptRoot\FlaskApp"
 
 . $PSScriptRoot\..\General_Scripts\InstallFlaskIIS.ps1
+C:\Python\python.exe -m pip install translate
 
 NET LOCALGROUP "Administrators" "IUSR" /ADD
 
