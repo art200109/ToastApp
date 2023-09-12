@@ -153,7 +153,6 @@ body {margin:0;}
     <p>
         {% for event in events %}
             <span class="json_event">{{ event["value"] }}</span>
-            <br><br>
         {% endfor %}
     </p>
 <script>
@@ -239,6 +238,8 @@ body {margin:0;}
     json_elements.forEach( el => {
         try {
             el.innerHTML = jsonViewer(JSON.parse(el.innerHTML), true);
+            el.parentNode.insertBefore(document.createElement("br"), el.nextSibling);
+            el.parentNode.insertBefore(document.createElement("br"), el.nextSibling);
         }
         catch {
             el.innerHTML = ""
