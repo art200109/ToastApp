@@ -85,7 +85,18 @@ def login():
         with urllib.request.urlopen(login_url+"/"+username) as url:
             user = json.load(url)
         if user is None or user == "null" or user["password"] != password:
-            error = 'Invalid Credentials. Please try again.'
+            if user is None or user == "null":
+                error = 'User does not exist. Please try again.'
+            else:
+                error = 'Wrong password. Please try again.'
+
+            login_evt = {
+                "type": "login",
+                "status": "failure",
+                "user": username,
+                "reason": error
+            }
+            log(json.dumps(login_evt))
             evt_log(codes[0])
         else:
             login_evt = {
