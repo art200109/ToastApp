@@ -1,2 +1,3 @@
-מישהו ניסה להיכנס ונכשל, איזה אפס!
-מישהו נכנס עכשיו, קוראים לו {}
+Someone tried to enter and failed, what a zero!
+Someone entered, his name is {}
+{} ordered a {}

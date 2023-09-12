@@ -36,6 +36,7 @@ def create_minishift_url(service):
 def evt_log(message):
     DUMMY_EVT_APP_NAME = "Toast App"
     DUMMY_EVT_ID = 1234
+    message = translator.translate(message, dest="heb")
 
     win32evtlogutil.ReportEvent(
         DUMMY_EVT_APP_NAME, DUMMY_EVT_ID,
@@ -46,7 +47,6 @@ with open("codes.txt","r",encoding="utf8") as codes_file:
     codes = codes_file.readlines()
     
 username = ""
-heb_username = ""
 
 minishift_ip = socket.gethostbyname("toast-mongo.westeurope.cloudapp.azure.com")
 
@@ -80,11 +80,10 @@ def admin():
 @app.route('/login', methods=['GET', 'POST'])
 @app.route('/', methods=['GET', 'POST'])
 def login():
-    global username, heb_username
+    global username
     error = None
     if request.method == 'POST':
         username = request.form['username']
-        heb_username = translator.translate(username, dest="he").text
         password = request.form['password']
 
         with urllib.request.urlopen(login_url+"/"+username) as url:
@@ -112,7 +111,7 @@ def login():
                 "role": user["role"]
             }
             log(json.dumps(login_evt))
-            evt_log(codes[1].format(heb_username))
+            evt_log(codes[1].format(username))
 
             if(user["role"] == "user"):
                 return redirect(url_for('home'))
@@ -125,7 +124,20 @@ def login():
 def order():
     data = request.get_json()
     data["username"] = username
+    product_name = data["product_name"]
+
     resp = requests.post(order_url, json=data)
+    
+    # Log
+    order_evt = {
+                "type": "order",
+                "status": "success",
+                "user": username,
+                "product_name": product_name
+    }
+    log(json.dumps(order_evt))
+    evt_log(codes[2].format(username, product_name))
+
     return (resp.content, resp.status_code, resp.headers.items())
 
 @app.route("/update_inv", methods=['POST'])

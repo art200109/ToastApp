@@ -101,7 +101,7 @@ for (let i = 0; i < filterbuttons.length; i++) {
   });
 }
 
-async function order(product_id, confirmed) {
+async function order(product_name, confirmed) {
   try {
     const response = await fetch("/order", {
       method: "post",
@@ -109,7 +109,7 @@ async function order(product_id, confirmed) {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ product_id: product_id, confirmed: confirmed }),
+      body: JSON.stringify({ product_name: product_name, confirmed: confirmed }),
     });
     if (!response.ok) {
       throw Error(response.status);

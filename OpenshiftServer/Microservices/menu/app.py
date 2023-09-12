@@ -17,9 +17,9 @@ app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
 def all_menu():
     return parse_mongo(client.toast.menu.find())
 
-@app.route("/<product_id>")
-def meal(product_id):
-    return parse_mongo(client.toast.menu.find_one(ObjectId(product_id)))
+@app.route("/<product_name>")
+def meal(product_name):
+    return parse_mongo(client.toast.inventory.find_one({ 'name': product_name}))
 
 def parse_mongo(data):
     return jsonify(json.loads(json_util.dumps(data)))

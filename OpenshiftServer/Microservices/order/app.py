@@ -28,7 +28,7 @@ def order():
     data["order_time"] = datetime.today()
     client.toast.orders.insert_one(data)
     
-    with urllib.request.urlopen(menu_url+"/"+data["product_id"]) as url:
+    with urllib.request.urlopen(menu_url+"/"+data["product_name"]) as url:
             meal = json.load(url)
             
     with urllib.request.urlopen(inventory_url) as url:
