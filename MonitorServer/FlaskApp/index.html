@@ -236,7 +236,12 @@ body {margin:0;}
 
     var json_elements = document.querySelectorAll('.json_event');
     json_elements.forEach( el => {
-        el.innerHTML = jsonViewer(JSON.parse(el.innerHTML), true);
+        try {
+            el.innerHTML = jsonViewer(JSON.parse(el.innerHTML), true);
+        }
+        catch {
+            el.innerHTML = ""
+        }
     });
 </script>
 </body>
