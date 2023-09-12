@@ -234,7 +234,7 @@ body {margin:0;}
         return parseObject(json);
     };
 
-    var json_elements = document.querySelector('.json_event');
+    var json_elements = document.querySelectorAll('.json_event');
     json_elements.forEach( el => {
         el.innerHTML = jsonViewer(el.innerHTML, true);
     });
