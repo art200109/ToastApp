@@ -36,7 +36,7 @@ def create_minishift_url(service):
 def evt_log(message):
     DUMMY_EVT_APP_NAME = "Toast App"
     DUMMY_EVT_ID = 1234
-    message = translator.translate(message, dest="he")
+    message = translator.translate(message, dest="he").text
 
     win32evtlogutil.ReportEvent(
         DUMMY_EVT_APP_NAME, DUMMY_EVT_ID,
