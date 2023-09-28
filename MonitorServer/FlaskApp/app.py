@@ -42,7 +42,8 @@ def login():
     db_connect = sqlite3.connect(os.path.join(os.path.dirname(path),"API","fake_database.db"))
     db_connect.row_factory = sqlite3.Row
     cursor = db_connect.cursor()
-    cursor.execute("select * from events")
+    cursor.execute("delete from events")
+    db_connect.commit()
     events = cursor.fetchall()
     parsed_events = []
     for item in events:
