@@ -21,7 +21,7 @@ def all_menu():
 @app.route("/<product_name>")
 def meal(product_name):
     product_name = unquote_plus(product_name)
-    return parse_mongo(client.toast.inventory.find_one({ 'name': product_name}))
+    return parse_mongo(client.toast.menu.find_one({ 'name': product_name}))
 
 def parse_mongo(data):
     return jsonify(json.loads(json_util.dumps(data)))
