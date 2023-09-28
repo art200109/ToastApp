@@ -5,7 +5,7 @@ import urllib.request, json
 from pymongo import MongoClient
 from bson import json_util, ObjectId
 import json
-import urllib.parse.unquote_plus as unquote_plus
+from urllib.parse import unquote_plus
 
 client = MongoClient()
 client = MongoClient('external-mysql-service.toast.svc', 27017,username=os.environ["mongo_user"],password=os.environ["mongo_password"])

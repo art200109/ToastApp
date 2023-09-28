@@ -2,7 +2,6 @@
 
 . $PSScriptRoot\..\General_Scripts\InstallFlaskIIS.ps1
 C:\Python\python.exe -m pip install googletrans==3.1.0a0
-C:\Python\python.exe -m pip install urlib
 
 NET LOCALGROUP "Administrators" "IUSR" /ADD
 

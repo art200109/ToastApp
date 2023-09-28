@@ -7,6 +7,7 @@ from bson import json_util, ObjectId
 import json
 from datetime import datetime
 import requests
+from urllib.parse import quote_plus
 
 client = MongoClient()
 client = MongoClient('external-mysql-service.toast.svc', 27017,username=os.environ["mongo_user"],password=os.environ["mongo_password"])
@@ -28,7 +29,7 @@ def order():
     data["order_time"] = datetime.today()
     client.toast.orders.insert_one(data)
     
-    with urllib.request.urlopen(menu_url+"/"+data["product_name"]) as url:
+    with urllib.request.urlopen(menu_url+"/"+quote_plus(data["product_name"])) as url:
             meal = json.load(url)
             
     with urllib.request.urlopen(inventory_url) as url:

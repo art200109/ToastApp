@@ -6,6 +6,7 @@ from pymongo import MongoClient
 from bson import json_util, ObjectId
 import json
 from bson.objectid import ObjectId
+from urllib.parse import unquote_plus
 
 client = MongoClient()
 client = MongoClient('external-mysql-service.toast.svc', 27017,username=os.environ["mongo_user"],password=os.environ["mongo_password"])
@@ -19,6 +20,7 @@ def all_menu():
 
 @app.route("/<product_name>")
 def meal(product_name):
+    product_name = unquote_plus(product_name)
     return parse_mongo(client.toast.inventory.find_one({ 'name': product_name}))
 
 def parse_mongo(data):
