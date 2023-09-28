@@ -47,6 +47,7 @@ def login():
     parsed_events = []
     for item in events:
         event = {k: item[k] for k in item.keys()}
+        print(event)
         val = json.loads(event["value"])
         val["time_stamp"] = event["time_stamp"]
         event["value"] = json.dumps(val)
