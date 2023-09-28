@@ -2,6 +2,7 @@ from flask import Flask, render_template, redirect, url_for, request
 import os
 import sqlite3
 import sys
+import json
 
 template_dir = os.path.dirname(__file__)
 app = Flask(__name__, template_folder=template_dir)
@@ -45,7 +46,11 @@ def login():
     events = cursor.fetchall()
     parsed_events = []
     for item in events:
-        parsed_events.append({k: item[k] for k in item.keys()})
+        event = {k: item[k] for k in item.keys()}
+        val = json.loads(event["value"])
+        val["time_stamp"] = event["time_stamp"]
+        event["value"] = json.dumps(val)
+        parsed_events.append(event)
 
     cursor.close()
     db_connect.close()
