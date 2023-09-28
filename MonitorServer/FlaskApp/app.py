@@ -42,13 +42,11 @@ def login():
     db_connect = sqlite3.connect(os.path.join(os.path.dirname(path),"API","fake_database.db"))
     db_connect.row_factory = sqlite3.Row
     cursor = db_connect.cursor()
-    cursor.execute("select * from events")
+    cursor.execute("delete from events")
     events = cursor.fetchall()
     parsed_events = []
     for item in events:
         event = {k: item[k] for k in item.keys()}
-        print(event.keys())
-        print(event["value"])
         val = json.loads(event["value"])
         val["time_stamp"] = event["time_stamp"]
         event["value"] = json.dumps(val)
