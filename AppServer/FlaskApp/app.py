@@ -7,7 +7,7 @@ import win32evtlog
 import requests
 from flask import Flask, redirect, render_template, request, url_for
 from googletrans import Translator, constants
-import urllib.parse.quote_plus as quote_plus
+from urllib.parse import quote_plus
 
 translator = Translator()
 
