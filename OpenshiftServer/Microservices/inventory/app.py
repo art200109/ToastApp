@@ -5,6 +5,7 @@ import urllib.request, json
 from pymongo import MongoClient
 from bson import json_util, ObjectId
 import json
+import urllib.parse.unquote_plus as unquote_plus
 
 client = MongoClient()
 client = MongoClient('external-mysql-service.toast.svc', 27017,username=os.environ["mongo_user"],password=os.environ["mongo_password"])
@@ -26,6 +27,8 @@ def update_item():
 
 @app.route("/<product_name>", methods=['PUT'])
 def update_item_amount(product_name):
+    product_name = unquote_plus(product_name)
+
     data = request.get_json()
     product = client.toast.inventory.find_one({ 'name': product_name})
 
@@ -37,6 +40,7 @@ def update_item_amount(product_name):
 
 @app.route("/<product_name>", methods=['GET'])
 def item(product_name):
+    product_name = unquote_plus(product_name)
     return parse_mongo(client.toast.inventory.find_one({ 'name': product_name}))
 
 def parse_mongo(data):

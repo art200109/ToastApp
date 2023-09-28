@@ -7,6 +7,7 @@ import win32evtlog
 import requests
 from flask import Flask, redirect, render_template, request, url_for
 from googletrans import Translator, constants
+import urllib.parse.quote_plus as quote_plus
 
 translator = Translator()
 
@@ -144,7 +145,7 @@ def order():
 def update_inv():
     data = request.get_json()
 
-    resp = requests.put("{}/{}".format(inventory_url,data["product_name"]), json=data)
+    resp = requests.put("{}/{}".format(inventory_url,quote_plus(data["product_name"])), json=data)
     return (resp.content, resp.status_code, resp.headers.items())
 
 

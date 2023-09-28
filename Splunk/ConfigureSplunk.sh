@@ -13,3 +13,4 @@ chown -R splunk:splunk /opt/splunk
 su splunk
 
 /opt/splunk/bin/splunk start --accept-license --answer-yes --no-prompt --gen-and-print-passwd
+/opt/splunk/bin/splunk enable boot-start
