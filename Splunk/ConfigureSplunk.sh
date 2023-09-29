@@ -1,6 +1,4 @@
-sudo su
-
-sudo mkfs -t ext4 /dev/sdb
+sudo mkfs -F -t ext4 /dev/sdb
 sudo mkdir /opt/splunk
 sudo mount /dev/sdb /opt/splunk
 
@@ -10,7 +8,10 @@ wget -O splunk-9.1.1-64e843ea36b1.x86_64.rpm "https://download.splunk.com/produc
 rpm -hiv splunk-9.1.1-64e843ea36b1.x86_64.rpm
 
 chown -R splunk:splunk /opt/splunk
-su splunk
 
-/opt/splunk/bin/splunk start --accept-license --answer-yes --no-prompt --gen-and-print-passwd
-/opt/splunk/bin/splunk enable boot-start
+read -sp 'Splunk admin user password: ' passvar
+
+su - splunk -c "cp ./inputs.conf /opt/splunk/etc/system/local/"
+
+su - splunk -c "/opt/splunk/bin/splunk start --accept-license --answer-yes --no-prompt --seed-passwd $passvar"
+su - splunk -c "/opt/splunk/bin/splunk enable boot-start"
