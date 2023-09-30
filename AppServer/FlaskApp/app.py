@@ -22,12 +22,14 @@ def log(content):
         config.read(AGENT_CONFIG_FILE)
 
         log_url =  config["default"]["destination"]
+        auth = config["default"]["authorization"]
+
         print(content)
         return requests.post(
                             log_url, 
-                             headers={
+                            headers={
                                 "Content-type": "application/json",
-                                "Authorization": "Splunk 6163fea4-f6f9-450c-b73b-acea8415c63f"
+                                "Authorization": auth
                             },
                             json={
                                 "table":"events", 

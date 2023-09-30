@@ -1,5 +1,6 @@
 [default]
 destination = http://toast-monitor.westeurope.cloudapp.azure.com:8000/insert
+authentication = Sblunk c6db9907b41483afb66def2b7723baf96392babd46cbe401411016048a91e964
 
 [cpu]
 interval = 1
