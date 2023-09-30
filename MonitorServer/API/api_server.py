@@ -51,6 +51,7 @@ class DataBase():
 
             cursor.execute("""CREATE TABLE IF NOT EXISTS events (
                                 time_stamp TEXT NOT NULL,
+                                server_name TEXT NOT NULL,
                                 value TEXT NOT NULL
                                 )""")
             
@@ -124,9 +125,10 @@ class DataBase():
                                             'value': payload.get('value')
                                             })
             else: 
-                cursor.execute(f"INSERT INTO {payload['table']} VALUES (:time_stamp, :value)",
+                cursor.execute(f"INSERT INTO {payload['table']} VALUES (:time_stamp ,:server_name, :value)",
                                             {
                                             'time_stamp': datetime.now().strftime("%d/%m/%y %H:%M:%S.%f"),
+                                            'server_name': payload.get('server_name'),
                                             'value': json.dumps(payload.get('event'))
                                             })
 
