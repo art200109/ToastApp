@@ -59,56 +59,50 @@
     - #HEADER
   -->
 
-    <header class="header" data-header>
-      <div class="container">
-        <h1>
-          <a href="#" class="logo">Foodie<span class="span">.</span></a>
-        </h1>
+  <header class="header" data-header>
+    <div class="container">
+      <h1>
+        <a href="#" class="logo">Toasty<span class="span">.</span></a>
+      </h1>
 
-        <nav class="navbar" data-navbar>
-          <ul class="navbar-list">
-            <li class="nav-item">
-              <a href="#home" class="navbar-link" data-nav-link>Home</a>
-            </li>
+      <nav class="navbar" data-navbar>
+        <ul class="navbar-list">
+          <li class="nav-item">
+            <a href="#home" class="navbar-link" data-nav-link>בית</a>
+          </li>
 
-            <li class="nav-item">
-              <a href="#about" class="navbar-link" data-nav-link>About Us</a>
-            </li>
 
-            <li class="nav-item">
-              <a href="#food-menu" class="navbar-link" data-nav-link>Shop</a>
-            </li>
+          <li class="nav-item">
+            <a href="#food-menu" class="navbar-link" data-nav-link>למילוי מלאי</a>
+          </li>
+        </ul>
+      </nav>
 
-            <li class="nav-item">
-              <a href="#" class="navbar-link" data-nav-link>Contact Us</a>
-            </li>
-          </ul>
-        </nav>
-
-        <div class="header-btn-group">
-          <button class="btn btn-hover">
-            <div class="container" style="font-size: x-large">
-              <ion-icon
-                role="img"
-                class="md hydrated"
-                aria-label="search outline"
-                name="person-circle-outline"
-              ></ion-icon>
-              <div>{{ username }}</div>
-            </div>
-          </button>
-          <button
-            class="nav-toggle-btn"
-            aria-label="Toggle Menu"
-            data-menu-toggle-btn
-          >
-            <span class="line top"></span>
-            <span class="line middle"></span>
-            <span class="line bottom"></span>
-          </button>
-        </div>
+      <div class="header-btn-group">
+        <button class="btn btn-hover">
+          <div class="container" style="font-size: x-large">
+            <ion-icon
+              role="img"
+              class="md hydrated"
+              aria-label="search outline"
+              name="person-circle-outline"
+            ></ion-icon>
+            <div>{{ username }}</div>
+          </div>
+        </button>
+        <button
+          class="nav-toggle-btn"
+          aria-label="Toggle Menu"
+          data-menu-toggle-btn
+        >
+          <span class="line top"></span>
+          <span class="line middle"></span>
+          <span class="line bottom"></span>
+        </button>
       </div>
-    </header>
+    </div>
+  </header>
+
 
     <main>
       <article>
@@ -116,46 +110,45 @@
         - #HERO
       -->
 
-        <section
-          class="hero"
-          id="home"
-          style="background-image: url('./assets/images/hero-bg.jpg')"
-        >
-          <div class="container">
-            <div class="hero-content">
-              <p class="hero-subtitle">Eat Sleep And</p>
+      <section
+      class="hero"
+      id="home"
+      style="background-image: url('./assets/images/hero-bg.jpg')"
+    >
+      <div class="container">
+        <div class="hero-content">
+          <p class="hero-subtitle">Eat Sleep And Code</p>
 
-              <h2 class="h1 hero-title">Supper delicious Burger in town!</h2>
+          <h2 class="h1 hero-title">טוסטים של בית!</h2>
 
-              <p class="hero-text">
-                Food is any substance consumed to provide nutritional support
-                for an organism.
-              </p>
+          <p class="hero-text">
+            הטוסטים שלנו אינם רק אוכל - הם הזיכרונות של הבית.
+            בכל לחם נפלטת אהבה, מתיקות וטריות שמקורם במטבח שלנו
+          </p>
+          <input type="button" onclick="location.href='#food-menu'" value="לחידוש מלאי לחצו כאן" class="btn" style="width: 15%;cursor: pointer;">
+        </div>
 
-              <button class="btn">Book A Table</button>
-            </div>
+        <figure class="hero-banner">
+          <img
+            src="./assets/images/hero-banner-bg.png"
+            width="820"
+            height="716"
+            alt=""
+            aria-hidden="true"
+            class="w-100 hero-img-bg"
+          />
 
-            <figure class="hero-banner">
-              <img
-                src="./assets/images/hero-banner-bg.png"
-                width="820"
-                height="716"
-                alt=""
-                aria-hidden="true"
-                class="w-100 hero-img-bg"
-              />
-
-              <img
-                src="./assets/images/toaster.png"
-                width="700"
-                height="637"
-                loading="lazy"
-                alt="Burger"
-                class="w-100 hero-img"
-              />
-            </figure>
-          </div>
-        </section>
+          <img
+            src="./assets/images/toaster.png"
+            width="700"
+            height="637"
+            loading="lazy"
+            alt="Burger"
+            class="w-100 hero-img"
+          />
+        </figure>
+      </div>
+    </section>
 
         <!-- 
         - #FOOD MENU
@@ -163,15 +156,15 @@
 
         <section class="section food-menu" id="food-menu">
           <div class="container">
-            <p class="section-subtitle">Popular Dishes</p>
+            <p class="section-subtitle">המלאי שלנו</p>
 
             <h2 class="h2 section-title">
-              Our Delicious <span class="span">Foods</span>
+              <span class="span">ופג תוקף!</span>
+              הכל פה רקוב
             </h2>
 
             <p class="section-text">
-              Food is any substance consumed to provide nutritional support for
-              an organism.
+              (אפילו אנגלית לא תעזור פה)
             </p>
 
             <ul class="fiter-list">
@@ -244,96 +237,94 @@
     - #FOOTER
   -->
 
-    <footer class="footer">
-      <div
-        class="footer-top"
-        style="background-image: url('./assets/images/footer-illustration.png')"
-      >
-        <div class="container">
-          <div class="footer-brand">
-            <a href="" class="logo">Foodie<span class="span">.</span></a>
+  <footer class="footer">
+    <div
+      class="footer-top"
+      style="background-image: url('./assets/images/footer-illustration.png')"
+    >
+      <div class="container">
+        <div class="footer-brand">
+          <a href="" class="logo">Toasty<span class="span">.</span></a>
 
-            <p class="footer-text">
-              Financial experts support or help you to to find out which way you
-              can raise your funds more.
-            </p>
-
-            <ul class="social-list">
-              <li>
-                <a href="#" class="social-link">
-                  <ion-icon name="logo-facebook"></ion-icon>
-                </a>
-              </li>
-
-              <li>
-                <a href="#" class="social-link">
-                  <ion-icon name="logo-twitter"></ion-icon>
-                </a>
-              </li>
-
-              <li>
-                <a href="#" class="social-link">
-                  <ion-icon name="logo-instagram"></ion-icon>
-                </a>
-              </li>
-
-              <li>
-                <a href="#" class="social-link">
-                  <ion-icon name="logo-pinterest"></ion-icon>
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <ul class="footer-list">
-            <li>
-              <p class="footer-list-title">Contact Info</p>
-            </li>
-
-            <li>
-              <p class="footer-list-item">+1 (062) 109-9222</p>
-            </li>
-
-            <li>
-              <p class="footer-list-item">Info@YourGmail24.com</p>
-            </li>
-
-            <li>
-              <address class="footer-list-item">
-                153 Williamson Plaza, Maggieberg, MT 09514
-              </address>
-            </li>
-          </ul>
-
-          <ul class="footer-list">
-            <li>
-              <p class="footer-list-title">Opening Hours</p>
-            </li>
-
-            <li>
-              <p class="footer-list-item">Monday-Friday: 08:00-22:00</p>
-            </li>
-
-            <li>
-              <p class="footer-list-item">Tuesday 4PM: Till Mid Night</p>
-            </li>
-
-            <li>
-              <p class="footer-list-item">Saturday: 10:00-16:00</p>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="footer-bottom">
-        <div class="container">
-          <p class="copyright-text">
-            &copy; 2022 <a href="#" class="copyright-link">codewithsadee</a> All
-            Rights Reserved.
+          <p class="footer-text">
+            הנהלת המקום לא נושאת שום אחריות - מינימלית ככל שתהיה. אנו מנועים משפטית לדון בנושא גל קלקולי הקיבה והקשר התיאורטי שלנו להתפרצות הקורונה
           </p>
+
+          <ul class="social-list">
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-facebook"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-twitter"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-instagram"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-pinterest"></ion-icon>
+              </a>
+            </li>
+          </ul>
         </div>
+
+        <ul class="footer-list">
+          <li>
+            <p class="footer-list-title">לפרטים נוספים</p>
+          </li>
+
+          <li>
+            <p class="footer-list-item">+123 (962) 152-4227</p>
+          </li>
+
+          <li>
+            <p class="footer-list-item">Artume@toastie.com</p>
+          </li>
+
+          <li>
+            <address class="footer-list-item">
+              רחוב לא ידוע, פינת מה אכפת לך, מרכז הארץ, קפריסין
+            </address>
+          </li>
+        </ul>
+
+        <ul class="footer-list">
+          <li>
+            <p class="footer-list-title">שעות פעילות</p>
+          </li>
+
+          <li>
+            <p class="footer-list-item">ראשון-רביעי: 10:00-17:00</p>
+          </li>
+
+          <li>
+            <p class="footer-list-item">חמישי: 11:00-15:00</p>
+          </li>
+
+          <li>
+            <p class="footer-list-item">שישי-שבת: סגור</p>
+          </li>
+        </ul>
       </div>
-    </footer>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container">
+        <p class="copyright-text">
+          &copy; 2023 <a href="#" class="copyright-link">ארטיום וחורי בע"מ</a> כל הזכויות שמורות
+        </p>
+      </div>
+    </div>
+  </footer>
 
     <!-- 
     - #BACK TO TOP
