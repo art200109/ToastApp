@@ -49,7 +49,7 @@ with open("codes.txt","r",encoding="utf8") as codes_file:
     
 username = ""
 
-minishift_ip = socket.gethostbyname("toast-mongo.westeurope.cloudapp.azure.com")
+minishift_ip = socket.gethostbyname("toast-ocp.westeurope.cloudapp.azure.com")
 
 
 menu_url = create_minishift_url("menu")
