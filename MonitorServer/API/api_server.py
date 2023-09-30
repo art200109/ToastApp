@@ -92,8 +92,8 @@ class DataBase():
         db_connect = sqlite3.connect(os.path.join(folder_path,self.db_name))
         cursor = db_connect.cursor()
 
-        min_q = cursor.execute(f"SELECT MIN(rowid) FROM {payload['table']} WHERE server_name={payload.get('server_name')}").fetchone()[0]
-        max_q = cursor.execute(f"SELECT MAX(rowid) FROM {payload['table']} WHERE server_name={payload.get('server_name')}").fetchone()[0]
+        min_q = cursor.execute(f"SELECT MIN(rowid) FROM {payload['table']} WHERE server_name='{payload.get('server_name')}'").fetchone()[0]
+        max_q = cursor.execute(f"SELECT MAX(rowid) FROM {payload['table']} WHERE server_name='{payload.get('server_name')}'").fetchone()[0]
 
         if min_q is not None and max_q is not None:
             if self.max_entries == (max_q - min_q):
