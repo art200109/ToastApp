@@ -12,6 +12,3 @@ format = {"table":"memory", "server_name":"<HOST>", "value": "<VALUE>"}
 [disk]
 interval = 15
 format = {"table":"disk", "server_name":"<HOST>", "disk_name": "<DISK>", "value": "<VALUE>"}
-
-[logs]
-format = {"table":"events", "server_name":"<HOST>", "value": "<VALUE>"}

@@ -2,6 +2,7 @@ import sys, os
 import sqlite3, json
 import uvicorn
 import threading
+import json
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware 
 from datetime import datetime
@@ -126,7 +127,7 @@ class DataBase():
                 cursor.execute(f"INSERT INTO {payload['table']} VALUES (:time_stamp, :value)",
                                             {
                                             'time_stamp': datetime.now().strftime("%d/%m/%y %H:%M:%S.%f"),
-                                            'value': payload.get('event')
+                                            'value': json.dumps(payload.get('event'))
                                             })
 
         except Exception as e:
