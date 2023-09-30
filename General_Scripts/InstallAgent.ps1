@@ -1,4 +1,4 @@
-C:\Python\python.exe -m pip install -r ..\MonitoringAgent\requirements.txt
+C:\Python\python.exe -m pip install -r $PSScriptRoot\..\MonitoringAgent\requirements.txt
 
 . $PSScriptRoot\InstallNSSM.ps1
 

@@ -10,3 +10,4 @@ C:\Python\python.exe -m pip install wfastcgi --use-pep517
 C:\Python\python.exe -m pip install flask
 C:\Python\python.exe -m pip install requests
 C:\Python\python.exe -m pip install pywin32
+C:\Python\python.exe -m pip install urllib3==1.26.6
