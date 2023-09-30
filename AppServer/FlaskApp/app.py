@@ -139,22 +139,47 @@ def order():
     resp = requests.post(order_url, json=data)
     
     # Log
+    status = "success" if resp.ok else "failure"
+
     order_evt = {
                 "type": "order",
-                "status": "success",
+                "status": status,
                 "user": username,
                 "product_name": product_name
     }
     log(json.dumps(order_evt))
-    evt_log(codes[2].format(username, product_name))
+
+    if(resp.ok):
+        evt_log(codes[2].format(username, product_name))
+    else:
+        evt_log(codes[3].format(username, product_name))
+
 
     return (resp.content, resp.status_code, resp.headers.items())
 
 @app.route("/update_inv", methods=['POST'])
 def update_inv():
     data = request.get_json()
+    product_name = data["product_name"]
+    resp = requests.put("{}/{}".format(inventory_url,quote_plus(product_name)), json=data)
 
-    resp = requests.put("{}/{}".format(inventory_url,quote_plus(data["product_name"])), json=data)
+    
+    # Log
+    status = "success" if resp.ok else "failure"
+
+    order_evt = {
+                "type": "inventory fill",
+                "status": status,
+                "user": username,
+                "product_name": product_name
+    }
+    log(json.dumps(order_evt))
+
+    if(resp.ok):
+        evt_log(codes[4].format(product_name))
+    else:
+        evt_log(codes[5].format(product_name))
+        
     return (resp.content, resp.status_code, resp.headers.items())
 
 

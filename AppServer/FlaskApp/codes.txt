@@ -1,3 +1,6 @@
 Someone tried to enter and failed, what a zero!
 Someone entered, his name is {}
-{} ordered a {}
+{} ordered a {} - I think he succeeded
+{} tried to order a {} - I think he failed - don't really care why
+The manager refilled the inventory for this item - {} - I hope it will be enough
+The manager failed to refill the inventory for this item - {} - I guess you will starve to death
