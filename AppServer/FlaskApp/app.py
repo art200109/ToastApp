@@ -32,7 +32,7 @@ def log(content):
                             json={
                                 "table":"events", 
                                 "server_name":"toast-app.westeurope.cloudapp.azure.com",
-                                "event": content
+                                "event": json.loads(content)
                             },
                             verify=False
         ).content
