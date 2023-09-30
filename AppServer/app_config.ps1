@@ -1,4 +1,4 @@
-﻿$app_path = "C:\inetpub\www\ToastApp\AppServer\FlaskApp"
+﻿$app_path = "C:\inetpub\wwwroot\ToastApp\AppServer\FlaskApp"
 
 . $PSScriptRoot\..\General_Scripts\InstallFlaskIIS.ps1
 C:\Python\python.exe -m pip install googletrans==3.1.0a0
