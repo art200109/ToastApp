@@ -15,3 +15,5 @@ Remove-WebHandler FlaskHandler -PSPath 'IIS:\Sites\Default Web Site\login'
 
 
 . $PSScriptRoot\..\General_Scripts\ChangeRDP.ps1
+
+Read-Host "Finish..."

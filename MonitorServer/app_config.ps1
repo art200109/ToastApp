@@ -4,7 +4,7 @@
 
 . $PSScriptRoot\..\General_Scripts\InstallAgent.ps1
 
-pip install -r .\API\requirements.txt
+C:\Python\python.exe -m pip install -r .\API\requirements.txt
 
 . $PSScriptRoot\..\General_Scripts\InstallNSSM.ps1
 
@@ -16,3 +16,5 @@ ConvertTo-WebApplication -PSPath 'IIS:\Sites\Default Web Site\assets'
 Remove-WebHandler FlaskHandler -PSPath 'IIS:\Sites\Default Web Site\assets'
 
 . $PSScriptRoot\..\General_Scripts\ChangeRDP.ps1
+
+Read-Host "Finish..."
