@@ -1,4 +1,4 @@
-﻿$app_path = "$PSScriptRoot\FlaskApp"
+﻿$app_path = "C:\inetpub\www\ToastApp\MonitorServer\FlaskApp"
 
 . $PSScriptRoot\..\General_Scripts\InstallFlaskIIS.ps1
 
@@ -8,7 +8,7 @@ C:\Python\python.exe -m pip install -r .\API\requirements.txt
 
 . $PSScriptRoot\..\General_Scripts\InstallNSSM.ps1
 
-Config-NSSM -serviceName "Sblunk" -appPath $(Resolve-Path ".\API\api_server.py").path
+Config-NSSM -serviceName "Sblunk" -appPath "C:\inetpub\www\ToastApp\MonitorServer\API\api_server.py"
 Start-Service Sblunk
 Set-Service -StartupType Automatic "Sblunk"
 
