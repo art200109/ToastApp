@@ -5,6 +5,7 @@ python3 get-pip.py
 /usr/local/bin/pip3 install -r ../MonitoringAgent/requirements.txt
 
 cp ../MonitoringAgent/nix_sblunk_uf.service  /etc/systemd/system/
+cp ../MonitoringAgent/conf_backup/original_agent.conf.backup  ../MonitoringAgent/agent.conf
 
 systemctl daemon-reload
 systemctl enable nix_sblunk_uf
