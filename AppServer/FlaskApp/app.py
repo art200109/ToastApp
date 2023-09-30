@@ -11,7 +11,7 @@ from urllib.parse import quote_plus
 
 translator = Translator()
 
-#log_url = "http://toast-splunk.westeurope.cloudapp.azure.com:8088/services/collector/raw"
+#log_url = "https://toast-splunk.westeurope.cloudapp.azure.com:8088/services/collector/raw"
 log_url = "http://toast-monitor.westeurope.cloudapp.azure.com:8000/insert"
 
 
@@ -21,13 +21,14 @@ def log(content):
                             log_url, 
                              headers={
                                 "Content-type": "application/json",
-                                "Authorization": "Splunk 0163e671-3e4f-45c5-8906-770c20e98408"
+                                "Authorization": "Splunk 6163fea4-f6f9-450c-b73b-acea8415c63f"
                             },
                             json={
                                 "table":"events", 
                                 "server_name":"toast-app.westeurope.cloudapp.azure.com",
                                 "event": content
-                            }
+                            },
+                            verify=False
         ).content
 
 
