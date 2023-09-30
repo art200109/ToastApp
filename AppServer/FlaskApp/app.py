@@ -5,17 +5,23 @@ import urllib.request
 import win32evtlogutil
 import win32evtlog
 import requests
+import configparser
 from flask import Flask, redirect, render_template, request, url_for
-from googletrans import Translator, constants
+from googletrans import Translator
 from urllib.parse import quote_plus
+
 
 translator = Translator()
 
+AGENT_CONFIG_FILE = r'C:\inetpub\wwwroot\ToastApp\MonitoringAgent\agent.conf'
 #log_url = "https://toast-splunk.westeurope.cloudapp.azure.com:8088/services/collector/raw"
 log_url = "http://toast-monitor.westeurope.cloudapp.azure.com:8000/insert"
 
-
 def log(content):
+        config = configparser.ConfigParser()
+        config.read(AGENT_CONFIG_FILE)
+
+        log_url =  config["default"]["destination"]
         print(content)
         return requests.post(
                             log_url, 
