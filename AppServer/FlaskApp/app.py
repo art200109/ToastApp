@@ -171,6 +171,7 @@ def update_inv():
                 "type": "inventory fill",
                 "status": status,
                 "user": username,
+                "delta": data["delta"],
                 "product_name": product_name
     }
     log(json.dumps(order_evt))
