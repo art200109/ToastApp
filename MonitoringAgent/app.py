@@ -19,7 +19,8 @@ def log(formated_template):
                             "Content-type": "application/json",
                             "Authorization": AUTH
                 },
-                json=formated_template
+                json=formated_template,
+                verify=False
     )
 
 def time_loop(function,template,interval):
